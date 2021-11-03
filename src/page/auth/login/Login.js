@@ -4,7 +4,7 @@ import { Card, Form, Input, Row, Col, Divider, Button } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import './Login.less';
 import { useHistory } from 'react-router';
-import { auth, signInWithEmailAndPassword } from '../../../firebase';
+import { getAuth } from "firebase/auth";
 
 function Login() {
   const [form] = Form.useForm();
@@ -14,7 +14,7 @@ function Login() {
   ];
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(getAuth());
   const history = useHistory();
   useEffect(() => {
     if (loading) {
