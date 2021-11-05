@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { Card, Form, Input, Row, Col, Divider, Button } from 'antd';
+import {
+  Card,
+  Form,
+  Input,
+  Row,
+  Col,
+  Divider,
+  Button,
+  Spin,
+  notification,
+} from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import './Login.less';
 import { useHistory } from 'react-router';
-import { getAuth } from "firebase/auth";
+import { signInWithEmailAndPassword } from '@firebase/auth';
+import { auth } from '../../../firebase';
 
 function Login() {
   const [form] = Form.useForm();
@@ -14,28 +24,37 @@ function Login() {
   ];
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, loading] = useAuthState(getAuth());
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState();
+  const [error, setError] = useState();
   const history = useHistory();
   useEffect(() => {
     if (loading) {
       // maybe trigger a loading screen
       return;
     }
-    if (user) history.replace('/dashboard');
+    if (user) history.replace('/');
   }, [user, loading]);
   const normalLogin = async () => {
-    await signInWithEmailAndPassword(email, password);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setUser(true);
+    } catch (e) {
+      notification.info({
+        message: `Đăng nhập thất bại`,
+        description: 'Sai tên hoặc mật khẩu',
+      });
+    }
   };
   const signInWithGoogle = async () => {
-    await signInWithGoogle();
+    console.log('hehe');
   };
-  const handleChangeEmail = value => {
-    setEmail(value);
+  const handleChangeEmail = e => {
+    setEmail(e.target.value);
   };
-  const handleChangePassword = value => {
-    setPassword(value);
+  const handleChangePassword = e => {
+    setPassword(e.target.value);
   };
-
   return (
     <Row justify="center" align="stretch" style={{ minHeight: '100vh' }}>
       <Col span={12} flex="auto" className="login-container">

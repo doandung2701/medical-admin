@@ -1,4 +1,6 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyC9HYL9aBFdXaBEzD2_JYnAXryYldJYr8U',
@@ -9,5 +11,6 @@ const firebaseConfig = {
   messagingSenderId: '720129545652',
   appId: '1:720129545652:web:7fb593c36603939d824ee1',
 };
+
 const firebaseApp = initializeApp(firebaseConfig);
 export default firebaseApp;

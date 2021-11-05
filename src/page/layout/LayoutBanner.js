@@ -10,7 +10,9 @@ import {
 } from '@ant-design/icons';
 import { Layout, Menu, Badge } from 'antd';
 import './Style.less';
+import { signOut } from '@firebase/auth';
 import { getUsernameAvatar } from '../../component/UserAvatar';
+import { auth } from '../../firebase';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -27,7 +29,9 @@ function LayoutBanner({ collapsed, handleOnCollapse }) {
 
   const handleLanguageMenuClick = () => {};
   const handleSettingMenuClick = () => {};
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    signOut(auth);
+  };
 
   return (
     <Header className="header" style={{ background: '#fff', padding: 0 }}>

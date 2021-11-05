@@ -5,6 +5,7 @@ import ShowCustomers from '../page/customer/ShowCustomers';
 import ShowProducts from '../page/product/ShowProducts';
 import AddProduct from '../page/product/AddProduct';
 import Login from '../page/auth/login/Login';
+import { PrivateRoute } from './PrivateRoute';
 
 const routes = [
   {
@@ -33,7 +34,7 @@ function RoutingList() {
   return routes.map(item => {
     if (item.path.split('/').length === 2) {
       return (
-        <Route
+        <PrivateRoute
           exact
           path={item.path}
           component={item.component}
