@@ -13,8 +13,10 @@ import {
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import './Login.less';
 import { useHistory } from 'react-router';
-import { signInWithEmailAndPassword } from '@firebase/auth';
-import { auth } from '../../../firebase';
+import { signInWithEmailAndPassword, getAuth } from '@firebase/auth';
+import { useSelector } from 'react-redux';
+import firebaseApp from '../../../firebase';
+import { getUserFromAuthState } from '../../../redux/selector/authSelector';
 
 function Login() {
   const [form] = Form.useForm();
@@ -22,12 +24,18 @@ function Login() {
   const passwordNameRule = [
     { required: true, message: 'Password is required' },
   ];
+  const userState = useSelector(getUserFromAuthState);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState();
   const [error, setError] = useState();
   const history = useHistory();
+  useEffect(() => {
+    if (userState) {
+      history.push('/');
+    }
+  }, [userState]);
   useEffect(() => {
     if (loading) {
       // maybe trigger a loading screen
@@ -37,17 +45,19 @@ function Login() {
   }, [user, loading]);
   const normalLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const respones = await signInWithEmailAndPassword(
+        getAuth(firebaseApp),
+        email,
+        password
+      );
       setUser(true);
     } catch (e) {
+      console.log(e);
       notification.info({
         message: `Đăng nhập thất bại`,
         description: 'Sai tên hoặc mật khẩu',
       });
     }
-  };
-  const signInWithGoogle = async () => {
-    console.log('hehe');
   };
   const handleChangeEmail = e => {
     setEmail(e.target.value);
@@ -87,9 +97,6 @@ function Login() {
             <Row justify="center">
               <Button type="primary" onClick={normalLogin}>
                 Login
-              </Button>
-              <Button type="link" onClick={signInWithGoogle}>
-                Login with Google
               </Button>
             </Row>
           </Form>

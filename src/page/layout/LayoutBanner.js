@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 import React from 'react';
 import {
   MenuUnfoldOutlined,
@@ -11,13 +12,19 @@ import {
 import { Layout, Menu, Badge } from 'antd';
 import './Style.less';
 import { signOut } from '@firebase/auth';
+import { getAuth } from 'firebase/auth';
+import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
 import { getUsernameAvatar } from '../../component/UserAvatar';
-import { auth } from '../../firebase';
+import firebaseApp from '../../firebase';
+import { LOGOUT } from '../../redux/reducer/authReducer';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
 function LayoutBanner({ collapsed, handleOnCollapse }) {
+  const history = useHistory();
+  const dispath = useDispatch();
   const getCollapseIcon = () => {
     if (collapsed) {
       return (
@@ -29,8 +36,16 @@ function LayoutBanner({ collapsed, handleOnCollapse }) {
 
   const handleLanguageMenuClick = () => {};
   const handleSettingMenuClick = () => {};
-  const handleLogout = () => {
-    signOut(auth);
+  const handleLogout = async () => {
+    try {
+      await signOut(getAuth(firebaseApp));
+      dispath({
+        type: LOGOUT,
+      });
+      history.push('/login');
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

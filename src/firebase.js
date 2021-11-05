@@ -1,6 +1,4 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { createContext, useContext, useEffect, useState } from 'react';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyC9HYL9aBFdXaBEzD2_JYnAXryYldJYr8U',

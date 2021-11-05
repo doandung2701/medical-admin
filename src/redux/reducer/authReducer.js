@@ -1,11 +1,10 @@
 export const RESET_AUTH_STATE = 'RESET_AUTH_STATE';
-
+export const LOGOUT = 'LOGOUT';
 export const initialState = {
   user: null,
   idToken: null,
   roles: null,
   isSuper: false,
-  isSeller: false,
   loadingUser: true,
 };
 
@@ -18,8 +17,11 @@ export default function authReducer(state = initialState, action) {
         idToken: action.payload.idToken,
         roles: action.payload.roles,
         isSuper: action.payload.isSuper,
-        isSeller: action.payload.isSeller,
         loadingUser: false,
+      };
+    case LOGOUT:
+      return {
+        ...initialState,
       };
     default:
       return state;

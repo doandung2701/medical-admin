@@ -1,16 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router';
-import { useAuth } from '../hook/useAuth';
+import { getUserFromAuthState } from '../redux/selector/authSelector';
 
 export const PrivateRoute = ({ component: C, ...props }) => {
-  console.log(useAuth());
+  const user = useSelector(getUserFromAuthState);
   return (
     <Route
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
       render={routeProps =>
         // eslint-disable-next-line react/jsx-props-no-spreading
-        true ? <C {...routeProps} /> : <Redirect to="/login" />
+        user != null ? <C {...routeProps} /> : <Redirect to="/login" />
       }
     />
   );
