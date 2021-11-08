@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Redirect, Route } from 'react-router';
-import { getUserFromAuthState } from '../redux/selector/authSelector';
+import { Redirect, Route, useHistory } from 'react-router';
 
 export const PrivateRoute = ({ component: C, ...props }) => {
-  const user = useSelector(getUserFromAuthState);
+  const auth  = useSelector(state => state.firebaseReducer.auth);
+  const history = useHistory();
+  useEffect(() => {
+    if (auth.isLoaded && auth.isEmpty) history.push('/');
+  }, [auth, history]);
+
   return (
     <Route
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
       render={routeProps =>
         // eslint-disable-next-line react/jsx-props-no-spreading
-        user != null ? <C {...routeProps} /> : <Redirect to="/login" />
+        auth != null && auth.uid != null ? <C {...routeProps} /> : <Redirect to="/login" />
       }
     />
   );

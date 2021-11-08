@@ -7,57 +7,32 @@ import {
   Col,
   Divider,
   Button,
-  Spin,
   notification,
 } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import './Login.less';
-import { useHistory } from 'react-router';
-import { signInWithEmailAndPassword, getAuth } from '@firebase/auth';
-import { useSelector } from 'react-redux';
-import firebaseApp from '../../../firebase';
-import { getUserFromAuthState } from '../../../redux/selector/authSelector';
-
+import {  useHistory } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import {signin} from '../../../redux/actions/auth';
 function Login() {
   const [form] = Form.useForm();
   const userNameRule = [{ required: true, message: 'User name is required' }];
   const passwordNameRule = [
     { required: true, message: 'Password is required' },
   ];
-  const userState = useSelector(getUserFromAuthState);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState();
-  const [error, setError] = useState();
   const history = useHistory();
-  useEffect(() => {
-    if (userState) {
-      history.push('/');
-    }
-  }, [userState]);
+  const dipatch = useDispatch();
   useEffect(() => {
     if (loading) {
       // maybe trigger a loading screen
       return;
     }
-    if (user) history.replace('/');
-  }, [user, loading]);
+  }, [loading]);
   const normalLogin = async () => {
-    try {
-      const respones = await signInWithEmailAndPassword(
-        getAuth(firebaseApp),
-        email,
-        password
-      );
-      setUser(true);
-    } catch (e) {
-      console.log(e);
-      notification.info({
-        message: `Đăng nhập thất bại`,
-        description: 'Sai tên hoặc mật khẩu',
-      });
-    }
+    dipatch(signin(email,password,()=>history.push('/')));
   };
   const handleChangeEmail = e => {
     setEmail(e.target.value);

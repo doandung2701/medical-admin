@@ -1,0 +1,29 @@
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .loader-text {
+    color: #29b1cc;
+    display: inline-block;
+    margin-left: 1em;
+  }
+  .loader-bounceball {
+    position: relative;
+    display: inline-block;
+    height: 37px;
+    width: 15px;
+    &::before {
+      position: absolute;
+      top: 0;
+      content: '';
+      display: block;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: #29b1cc;
+      transform-origin: 50%;
+      animation: bounce 500ms alternate infinite ease;
+    }
+  }
+}

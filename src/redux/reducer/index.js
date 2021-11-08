@@ -1,8 +1,10 @@
-import { combineReducers } from 'redux';
-import initReducer from './initReducer';
-import authReducer from './authReducer';
+import { combineReducers } from "redux";
+import { firebaseReducer } from "react-redux-firebase";
+import authReducer from "./auth";
+import apiStatusReducer from "./apiStatus";
 
 export default combineReducers({
-  initReducer,
+  firebaseReducer,
   authReducer,
+  apiStatusReducer
 });

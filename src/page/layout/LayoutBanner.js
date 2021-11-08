@@ -11,13 +11,11 @@ import {
 } from '@ant-design/icons';
 import { Layout, Menu, Badge } from 'antd';
 import './Style.less';
-import { signOut } from '@firebase/auth';
-import { getAuth } from 'firebase/auth';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { getUsernameAvatar } from '../../component/UserAvatar';
-import firebaseApp from '../../firebase';
-import { LOGOUT } from '../../redux/reducer/authReducer';
+import { useFirebase } from 'react-redux-firebase';
+import { signout } from '../../redux/actions/auth';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -25,6 +23,8 @@ const { SubMenu } = Menu;
 function LayoutBanner({ collapsed, handleOnCollapse }) {
   const history = useHistory();
   const dispath = useDispatch();
+  const firebase = useFirebase();
+  
   const getCollapseIcon = () => {
     if (collapsed) {
       return (
@@ -33,21 +33,11 @@ function LayoutBanner({ collapsed, handleOnCollapse }) {
     }
     return <MenuFoldOutlined onClick={handleOnCollapse} className="trigger" />;
   };
-
   const handleLanguageMenuClick = () => {};
   const handleSettingMenuClick = () => {};
   const handleLogout = async () => {
-    try {
-      await signOut(getAuth(firebaseApp));
-      dispath({
-        type: LOGOUT,
-      });
-      history.push('/login');
-    } catch (e) {
-      console.log(e);
-    }
+   dispath(signout());
   };
-
   return (
     <Header className="header" style={{ background: '#fff', padding: 0 }}>
       <div
@@ -107,8 +97,8 @@ function LayoutBanner({ collapsed, handleOnCollapse }) {
             </span>
           </Menu.Item>
           <Menu.Item key="setting:2">
-            <span>
-              <LogoutOutlined onClick={handleLogout} />
+            <span onClick={handleLogout}>
+              <LogoutOutlined />
               Logout
             </span>
           </Menu.Item>
