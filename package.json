@@ -17,9 +17,7 @@
     ]
   },
   "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+
   },
   "jest": {
     "testEnvironment": "jsdom",
