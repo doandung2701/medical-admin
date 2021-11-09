@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Layout } from 'antd';
+import { useSelector } from 'react-redux';
 import SiderMenu from './SiderMenu';
 import LayoutBanner from './LayoutBanner';
 import './Style.less';
 import RoutingList from '../../router/RoutingList';
-import { useSelector } from 'react-redux';
 import Loader from '../../component/Loader/Loader';
 import Login from '../auth/login/Login';
 import requireAuth from '../../hoc/requireAuth';
