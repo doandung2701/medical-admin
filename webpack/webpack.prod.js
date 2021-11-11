@@ -4,6 +4,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const commonPaths = require('./paths');
+const { DefinePlugin } = require('loader-utils/node_modules/@types/webpack');
 
 module.exports = {
   mode: 'production',
@@ -77,6 +78,9 @@ module.exports = {
       filename: `${commonPaths.cssFolder}/[name].css`,
       chunkFilename: `${commonPaths.cssFolder}/[name].css`,
     }),
+    new DefinePlugin({
+      'process.env.REACT_APP_BASE_API':JSON.stringify('https://api.arbedev.com')
+    })
   ],
   devtool: 'source-map',
 };
