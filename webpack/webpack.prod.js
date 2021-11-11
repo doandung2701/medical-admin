@@ -2,9 +2,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const { DefinePlugin } = require('webpack');
 
 const commonPaths = require('./paths');
-const { DefinePlugin } = require('loader-utils/node_modules/@types/webpack');
 
 module.exports = {
   mode: 'production',
