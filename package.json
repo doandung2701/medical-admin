@@ -16,9 +16,7 @@
       "git add"
     ]
   },
-  "husky": {
-
-  },
+  "husky": {},
   "jest": {
     "testEnvironment": "jsdom",
     "moduleDirectories": [
@@ -50,6 +48,7 @@
     "@babel/plugin-transform-react-constant-elements": "7.10.4",
     "@babel/plugin-transform-react-inline-elements": "7.10.4",
     "antd": "^4.7.0",
+    "axios": "^0.24.0",
     "babel-plugin-import": "^1.13.1",
     "babel-plugin-transform-react-pure-class-to-function": "1.0.1",
     "babel-plugin-transform-react-remove-prop-types": "0.4.24",

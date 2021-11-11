@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
 import useActionMenu from './ActionMenu';
+import { DEFAULT_LIMIT_SIZE } from '../globalConstants';
 
-const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE_NUMBER = 0;
 
-function useDataTable({ columns, dataSource, updateEntityPath }) {
+function useDataTable({ columns, dataSource, updateEntityPath, total }) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [selectedRow, setSelectedRow] = useState(null);
   const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE_NUMBER);
-  const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
+  const [pageSize, setPageSize] = useState(DEFAULT_LIMIT_SIZE);
   const [actionColumnView] = useActionMenu({ selectedRow, updateEntityPath });
 
   const hasSelected = selectedRowKeys.length > 0;
@@ -54,7 +54,7 @@ function useDataTable({ columns, dataSource, updateEntityPath }) {
       rowKey={record => record.id}
       rowSelection={rowSelection}
       columns={updatedColumns}
-      dataSource={dataSource.content}
+      dataSource={dataSource}
       onRow={record => {
         return {
           onClick: () => {
@@ -64,9 +64,9 @@ function useDataTable({ columns, dataSource, updateEntityPath }) {
       }}
       onChange={handleTableChange}
       pagination={{
-        pageSize: DEFAULT_PAGE_SIZE,
+        pageSize: DEFAULT_LIMIT_SIZE,
         current: currentPage + 1,
-        total: dataSource.totalElements,
+        total: total,
         showTotal: (total, range) => {
           return `${range[0]}-${range[1]} of ${total} items`;
         },

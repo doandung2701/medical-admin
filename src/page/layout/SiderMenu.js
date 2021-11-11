@@ -25,6 +25,9 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
       case 'dashboard':
         history.push('/');
         break;
+      case 'categoryList':
+        history.push('/categories');
+        break;  
       case 'showProducts':
         history.push('/products');
         break;
@@ -37,6 +40,9 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
       case 'addCustomer':
         history.push('/add-customer');
         break;
+      case 'showBrands':
+        history.push('/brands');
+        break;  
       default:
         history.push('/');
     }
@@ -59,6 +65,18 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           <DashboardOutlined />
           <span className="nav-text">Dashboard</span>
         </Menu.Item>
+        <SubMenu key="categories"
+         title={
+          <span>
+            <PartitionOutlined />
+            <span>Category</span>
+          </span>
+        }
+        >
+          <Menu.Item key="categoryList">
+            <span className="nav-text">List category</span>
+          </Menu.Item>
+        </SubMenu>
         <SubMenu
           key="products"
           title={
@@ -69,7 +87,7 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           }
         >
           <Menu.Item key="showProducts">
-            <span className="nav-text">Show Products</span>
+            <span className="nav-text">List Product</span>
           </Menu.Item>
           <Menu.Item key="addProduct">
             <span className="nav-text">Add Product</span>
@@ -89,6 +107,19 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           </Menu.Item>
           <Menu.Item key="addCustomer">
             <span className="nav-text">Add Customer</span>
+          </Menu.Item>
+        </SubMenu>
+        <SubMenu
+          key="brands"
+          title={
+            <span>
+              <TeamOutlined />
+              <span>Brands</span>
+            </span>
+          }
+        >
+          <Menu.Item key="showBrands">
+            <span className="nav-text">List Brand</span>
           </Menu.Item>
         </SubMenu>
         <Menu.Item key="settings">

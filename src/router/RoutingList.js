@@ -4,8 +4,11 @@ import Dashboard from '../page/dashboard/Dashboard';
 import ShowCustomers from '../page/customer/ShowCustomers';
 import ShowProducts from '../page/product/ShowProducts';
 import AddProduct from '../page/product/AddProduct';
-import Login from '../page/auth/login/Login';
 import { PrivateRoute } from './PrivateRoute';
+import CategoryList from '../page/category/CategoryList';
+import CategoryForm from '../page/category/CategoryForm';
+import BrandList from '../page/brand/BrandList';
+import BrandForm from '../page/brand/BrandForm';
 
 const routes = [
   {
@@ -28,6 +31,26 @@ const routes = [
     component: AddProduct,
     key: '/add-product',
   },
+  {
+    path: '/categories',
+    component: CategoryList
+  },
+  {
+    path: '/categories/:id',
+    component: CategoryForm
+  },
+  {
+    path: '/brands',
+    component: BrandList
+  },
+  {
+    path: '/brands/:id',
+    component: BrandForm
+  },
+  {
+    path: '/add-brand',
+    component: BrandForm
+  }
 ];
 
 function RoutingList() {

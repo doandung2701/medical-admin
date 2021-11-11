@@ -40,5 +40,7 @@ module.exports = {
     hot: true,
     historyApiFallback: true,
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [new webpack.HotModuleReplacementPlugin(),new webpack.DefinePlugin({
+    'process.env.REACT_APP_BASE_API':JSON.stringify('http://localhost:8081')
+  })],
 };
