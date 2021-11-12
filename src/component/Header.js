@@ -37,7 +37,7 @@ function Header({ addNewPath, hasSelected, handleSearch }) {
             Add New
           </Button>
 
-          <Button
+          {/* <Button
             icon={<DeleteOutlined />}
             disabled={!hasSelected}
             style={{ float: 'right', marginRight: 12 }}
@@ -49,7 +49,7 @@ function Header({ addNewPath, hasSelected, handleSearch }) {
             >
               Delete
             </Popconfirm>
-          </Button>
+          </Button> */}
         </Col>
       </Row>
       <Divider />

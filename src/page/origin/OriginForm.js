@@ -12,9 +12,9 @@ import {
     InputNumber,
     message,
   } from 'antd';
-import * as brandApi from '../../api/brandApi';
+import * as originApi from '../../api/originApi';
 import { useHistory, useLocation, useParams } from 'react-router';
-export default function BrandForm(props){
+export default function OriginForm(props){
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [isRedirect, setIsRedirect] = useState(false);
@@ -25,17 +25,17 @@ export default function BrandForm(props){
     const createData = async (data) =>{
         try{
             setLoading(true);
-            const response = await brandApi.create(data);
+            const response = await originApi.create(data);
             console.log(response);
             if(response.status === 201){
-                message.success('Add brand success');
+                message.success('Add origin success');
                 setIsRedirect(true);
             }
         }catch(e){
             if(e.response.data?.message){
                 message.error(e.response.data.message);
             }else{
-                message.error('Add brand error');
+                message.error('Add origin error');
             }
             
         }finally{
@@ -45,17 +45,17 @@ export default function BrandForm(props){
     const updateData = async (data) => {
         try{
             setLoading(true);
-            const response = await brandApi.updateById(id,data);
+            const response = await originApi.updateById(id,data);
             console.log(response);
             if(response.status === 200){
-                message.success('Update brand success');
+                message.success('Update origin success');
                 setIsRedirect(true);
             }
         }catch(e){
             if(e.response.data?.message){
                 message.error(e.response.data.message);
             }else{
-                message.error('Update brand error');
+                message.error('Update origin error');
             }
             
         }finally{
@@ -76,14 +76,14 @@ export default function BrandForm(props){
       const getDetailById = async () => {
         try{
             setLoading(true);
-            const response = await brandApi.getById(id);
+            const response = await originApi.getById(id);
             // console.log(response);
             form.setFieldsValue(response.data.data);
         }catch(e){
             if(e.response.data?.message){
                 message.error(e.response.data.message);
             }else{
-                message.error('Error when get brand');
+                message.error('Error when get origin');
             }
             setIsRedirect(true);
         }finally{
@@ -97,11 +97,11 @@ export default function BrandForm(props){
 }, [id]);
   useEffect(() => {
       if(isRedirect){
-        history.push('/brands');
+        history.push('/origins');
       }
   }, [isRedirect])
   return (
-    <Card title="Add Brand" loading={loading}>
+    <Card title="Add Origin" loading={loading}>
       <Row justify="center">
         <Col span={12}>
           <Form
@@ -112,6 +112,9 @@ export default function BrandForm(props){
             onFinish={handleSave}
           >
             <Form.Item label="Name" name="name" rules={requiredFieldRule}>
+              <Input />
+            </Form.Item>
+            <Form.Item label="Code" name="code" rules={requiredFieldRule}>
               <Input />
             </Form.Item>
             <Divider />

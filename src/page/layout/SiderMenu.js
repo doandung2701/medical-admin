@@ -42,6 +42,8 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
         break;
       case 'showBrands':
         history.push('/brands');
+      case 'showOrigins':
+        history.push('/origins');
         break;  
       default:
         history.push('/');
@@ -122,14 +124,27 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
             <span className="nav-text">List Brand</span>
           </Menu.Item>
         </SubMenu>
-        <Menu.Item key="settings">
+        <SubMenu
+          key="origins"
+          title={
+            <span>
+              <TeamOutlined />
+              <span>Origins</span>
+            </span>
+          }
+        >
+          <Menu.Item key="showOrigins">
+            <span className="nav-text">List Origin</span>
+          </Menu.Item>
+        </SubMenu>
+        {/* <Menu.Item key="settings">
           <SettingOutlined />
           <span className="nav-text">Settings</span>
         </Menu.Item>
         <Menu.Item key="reports">
           <FundProjectionScreenOutlined />
           <span className="nav-text">Reports</span>
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
     </Sider>
   );

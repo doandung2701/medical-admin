@@ -5,12 +5,12 @@ import { DEFAULT_LIMIT_SIZE } from '../globalConstants';
 
 const DEFAULT_PAGE_NUMBER = 0;
 
-function useDataTable({ columns, dataSource, updateEntityPath, total }) {
+function useDataTable({ columns, dataSource, updateEntityPath, total, loading = false }) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [selectedRow, setSelectedRow] = useState(null);
   const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE_NUMBER);
   const [pageSize, setPageSize] = useState(DEFAULT_LIMIT_SIZE);
-  const [actionColumnView] = useActionMenu({ selectedRow, updateEntityPath });
+  const [actionColumnView, deleteItem] = useActionMenu({ selectedRow, updateEntityPath });
 
   const hasSelected = selectedRowKeys.length > 0;
 
@@ -29,17 +29,6 @@ function useDataTable({ columns, dataSource, updateEntityPath, total }) {
       render: () => actionColumnView,
     },
   ];
-
-  useEffect(() => {
-    console.log('columns:', columns);
-    console.log('datasoure:', dataSource);
-    console.log('updateColumns:', updatedColumns);
-  });
-
-  const handleSingleDelete = () => {
-    console.log('handleSingleDelete, selected:', selectedRow);
-  };
-
   const resetPagination = () => {
     setCurrentPage(DEFAULT_PAGE_NUMBER);
   };
@@ -51,6 +40,7 @@ function useDataTable({ columns, dataSource, updateEntityPath, total }) {
 
   const DataTable = () => (
     <Table
+      loading={loading}
       rowKey={record => record.id}
       rowSelection={rowSelection}
       columns={updatedColumns}
@@ -82,6 +72,7 @@ function useDataTable({ columns, dataSource, updateEntityPath, total }) {
     currentPage,
     pageSize,
     resetPagination,
+    deleteItem
   };
 }
 

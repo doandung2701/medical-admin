@@ -9,6 +9,8 @@ import CategoryList from '../page/category/CategoryList';
 import CategoryForm from '../page/category/CategoryForm';
 import BrandList from '../page/brand/BrandList';
 import BrandForm from '../page/brand/BrandForm';
+import OriginList from '../page/origin/OriginList';
+import OriginForm from '../page/origin/OriginForm';
 
 const routes = [
   {
@@ -33,23 +35,43 @@ const routes = [
   },
   {
     path: '/categories',
-    component: CategoryList
+    component: CategoryList,
+    key: '/categories',
   },
   {
     path: '/categories/:id',
-    component: CategoryForm
+    component: CategoryForm,
+    key: '/categories/:id',
   },
   {
     path: '/brands',
-    component: BrandList
+    component: BrandList,
+    key: '/brands',
   },
   {
     path: '/brands/:id',
-    component: BrandForm
+    component: BrandForm,
+    key: '/brands/:id',
   },
   {
     path: '/add-brand',
-    component: BrandForm
+    component: BrandForm,
+    key: '/add-brand',
+  },
+  {
+    path: '/origins',
+    component: OriginList,
+    key: '/origins',
+  },
+  {
+    path: '/origins/:id',
+    component: OriginForm,
+    key: '/origins/:id',
+  },
+  {
+    path: '/add-origin',
+    component: OriginForm,
+    key: '/add-origin',
   }
 ];
 

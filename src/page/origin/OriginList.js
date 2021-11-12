@@ -3,16 +3,16 @@ import React, { useEffect, useState } from 'react';
 import useDataTable from '../../component/DataTable';
 import * as constants from './Constants';
 import { DEFAULT_LIMIT_SIZE } from '../../globalConstants';
-import * as brandApi from '../../api/brandApi';
-export default function BrandList(props) {
+import * as originApi from '../../api/originApi';
+export default function OriginList(props) {
     const [data, setData] = useState([]);
-    const [name, setName] = useState('');
+    const [search, setSearch] = useState('');
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(false);
     const hanldeDelete = async (selectedRow) => {
         try {
             setLoading(true);
-            const response = await brandApi.softDeleteById(selectedRow.id);
+            const response = await originApi.softDeleteById(selectedRow.id);
             if(response && response.status === 200){
                 let selectedId = data.findIndex(x => x.id === selectedRow.id);
                 if(selectedId !== -1){
@@ -43,18 +43,23 @@ export default function BrandList(props) {
     } = useDataTable({
         columns: constants.columns,
         dataSource: data,
-        updateEntityPath: 'brands',
+        updateEntityPath: 'origins',
         total,
         loading
     });
     const handleSearch = async (values) =>{
-        setName(values);
+        setSearch(values);
     }
     useEffect(() => {
         const searchRequest = async () => {
             try {
                 setLoading(true);
-                const response = await brandApi.query(name, currentPage * pageSize, pageSize);
+                const response = await originApi.query({
+                    name: search,
+                    code: search,
+                    offset: currentPage * pageSize,
+                    limit: pageSize
+                });
                 if(response && response.status === 206){
                    const totalCount= response.headers['x-total-count'];
                    console.log(totalCount);
@@ -69,14 +74,14 @@ export default function BrandList(props) {
             }
         }
         searchRequest();
-    }, [currentPage, pageSize,name]);
+    }, [currentPage, pageSize,search]);
     useEffect(() => {
         if(deleteItem)
             hanldeDelete(deleteItem);
     }, [deleteItem]);
     return (
         <>
-            <Header addNewPath="add-brand" hasSelected={hasSelected}  handleSearch={handleSearch}/>
+            <Header addNewPath="add-origin" hasSelected={hasSelected}  handleSearch={handleSearch}/>
             <DataTable />
         </>
     );

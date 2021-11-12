@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Dropdown, Menu, Popconfirm } from 'antd';
 import {
   DeleteOutlined,
@@ -8,9 +8,9 @@ import {
 } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
-function useActionMenu({ selectedRow, updateEntityPath }) {
+function useActionMenu({ selectedRow, updateEntityPath,callbackDelete }) {
   const history = useHistory();
-
+  const [selectedDeleteItem, setSelectedDeleteItem] = useState();
   const handleMenuClick = action => {
     if (action.key === 'edit') {
       const updatePath = '/' + updateEntityPath + '/' + selectedRow.id;
@@ -20,6 +20,7 @@ function useActionMenu({ selectedRow, updateEntityPath }) {
 
   const handleSingleDelete = () => {
     console.log('handleSingleDelete, selected:', selectedRow);
+    setSelectedDeleteItem(selectedRow);
   };
 
   const actionMenu = (
@@ -52,7 +53,7 @@ function useActionMenu({ selectedRow, updateEntityPath }) {
     </span>
   );
 
-  return [actionColumnView];
+  return [actionColumnView, selectedDeleteItem];
 }
 
 export default useActionMenu;

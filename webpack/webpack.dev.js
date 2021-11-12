@@ -41,6 +41,6 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [new webpack.HotModuleReplacementPlugin(),new webpack.DefinePlugin({
-    'process.env.REACT_APP_BASE_API':JSON.stringify('http://localhost:8081')
+    'process.env.REACT_APP_BASE_API':JSON.stringify('https://api.arbedev.com')
   })],
 };
