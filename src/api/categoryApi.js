@@ -18,11 +18,23 @@ const updateDisplayOrder = (body) =>{
 const deleteById = (id) => {
     return request().delete(`/category/${id}`);
 }
+const checkOrderValid = (order,parentId)=>{
+    return request().get(`/category/displays/order/checkValidOrder?order=${order}&parentId=${parentId?parentId:''}`);
+}
+const create = (cat) => {
+    return request().post(`/category`,cat);
+}
+const checkUpdateOrderValid = (order,id) => {
+    return request().get(`/category/displays/order/checkUpdateOrderValid?order=${order}&id=${id}`);
+}
 export {
     getCategoryByLevel,
     getCategoryByParentId,
     getCategoryDetailById,
     updateCategory,
     updateDisplayOrder,
-    deleteById
+    deleteById,
+    checkOrderValid,
+    create,
+    checkUpdateOrderValid 
 }

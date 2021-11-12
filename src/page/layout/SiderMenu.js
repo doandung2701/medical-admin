@@ -27,7 +27,7 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
         break;
       case 'categoryList':
         history.push('/categories');
-        break;  
+        break;
       case 'showProducts':
         history.push('/products');
         break;
@@ -44,7 +44,10 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
         history.push('/brands');
       case 'showOrigins':
         history.push('/origins');
-        break;  
+        break;
+      case 'showBanners':
+        history.push('/banners');
+        break;
       default:
         history.push('/');
     }
@@ -68,12 +71,12 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           <span className="nav-text">Dashboard</span>
         </Menu.Item>
         <SubMenu key="categories"
-         title={
-          <span>
-            <PartitionOutlined />
-            <span>Category</span>
-          </span>
-        }
+          title={
+            <span>
+              <PartitionOutlined />
+              <span>Category</span>
+            </span>
+          }
         >
           <Menu.Item key="categoryList">
             <span className="nav-text">List category</span>
@@ -137,6 +140,12 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
             <span className="nav-text">List Origin</span>
           </Menu.Item>
         </SubMenu>
+        <Menu.Item key="showBanners">
+          <span>
+            <TeamOutlined />
+            <span>Banner</span>
+          </span>
+        </Menu.Item>
         {/* <Menu.Item key="settings">
           <SettingOutlined />
           <span className="nav-text">Settings</span>

@@ -11,6 +11,7 @@ import BrandList from '../page/brand/BrandList';
 import BrandForm from '../page/brand/BrandForm';
 import OriginList from '../page/origin/OriginList';
 import OriginForm from '../page/origin/OriginForm';
+import BannerForm from '../page/banner/BannerForm';
 
 const routes = [
   {
@@ -77,6 +78,11 @@ const routes = [
     path: '/add-origin',
     component: OriginForm,
     key: '/add-origin',
+  },
+  {
+    path: '/banners',
+    component: BannerForm,
+    key: '/banners',
   }
 ];
 
