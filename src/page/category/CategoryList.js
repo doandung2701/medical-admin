@@ -1,8 +1,16 @@
-import { message, Tree } from 'antd';
+import { Button, Col, Divider, message, Row, Tree } from 'antd';
 import React, { useEffect, useState } from 'react';
+import {
+    PlusOutlined
+  } from '@ant-design/icons';
 import * as categoryApi from '../../api/categoryApi';
+import { useHistory } from 'react-router';
 function CategoryList(props){
     const [data, setData] = useState([]);
+    const history = useHistory();
+    const  handleAddNew = () => {
+        history.push('/add-category');
+    }
     const onLoadData = ({key,children}) => {
         return new Promise(async (resolve, reject) => {
             debugger;
@@ -60,10 +68,25 @@ function CategoryList(props){
        getCategoryByLevel();
     }, []);
     return (
+        <>
+        <Row>
+        <Col flex="auto">
+          <Button
+            icon={<PlusOutlined />}
+            type="primary"
+            style={{ float: 'right' }}
+            onClick={handleAddNew}
+          >
+            Add New
+          </Button>
+        </Col>
+      </Row>
+      <Divider />
         <Tree
         treeData={data}
         loadData={onLoadData}
         />
+        </>
     )
 }
 export default CategoryList;

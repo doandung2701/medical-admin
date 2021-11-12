@@ -44,6 +44,11 @@ const routes = [
     key: '/categories/:id',
   },
   {
+    path: '/add-category',
+    component: CategoryForm,
+    key: '/add-category',
+  },
+  {
     path: '/brands',
     component: BrandList,
     key: '/brands',
