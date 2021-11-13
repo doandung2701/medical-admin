@@ -18,7 +18,6 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as categoryApi from '../../api/categoryApi';
 import * as originApi from '../../api/originApi';
 import * as brandApi from '../../api/brandApi';
-import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 
 const { Option } = Select;
 
@@ -83,7 +82,7 @@ function AddProduct() {
   return (
     <Card title="Add Product" loading={false}>
       <Row justify="center">
-        <Col span={12}>
+        <Col span={24}>
           <Form
             labelCol={{ span: 6 }}
             wrapperCol={{ span: 14 }}
@@ -103,7 +102,13 @@ function AddProduct() {
             }}
               rules={requiredFieldRule}
             >
-              <CKEditor plugins={[Base64UploadAdapter]} editor={ClassicEditor} />
+              <CKEditor
+              config={{ckfinder: {
+                // Upload the images to the server using the CKFinder QuickUpload command
+                // You have to change this address to your server that has the ckfinder php connector
+                uploadUrl: process.env.REACT_APP_BASE_API + '/file/ckeditor/upload'
+            }}}
+             editor={ClassicEditor} />
             </Form.Item>
             <Form.Item hasFeedback label="Brand" name="brandId" rules={requiredFieldRule}>
               <Select allowClear clearIcon >
