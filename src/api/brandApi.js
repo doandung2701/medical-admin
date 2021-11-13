@@ -15,10 +15,14 @@ const updateById = (id,data) => {
 const softDeleteById = (id) => {
     return request().delete(`/brands/${id}`);
 }
+const getAll = () => {
+    return request().get(`/brands/getAll`);
+}
 export {
     query,
     create,
     getById,
     updateById,
-    softDeleteById
+    softDeleteById,
+    getAll
 }

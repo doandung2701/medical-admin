@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Switch,
   Card,
@@ -10,92 +10,143 @@ import {
   Divider,
   Button,
   InputNumber,
+  TreeSelect
 } from 'antd';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import * as categoryApi from '../../api/categoryApi';
+import * as originApi from '../../api/originApi';
+import * as brandApi from '../../api/brandApi';
+import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 
 const { Option } = Select;
 
 function AddProduct() {
   const [form] = Form.useForm();
-
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [origins, setOrigins] = useState([]);
+  const [loading, setLoading] = useState(false);
   const handleSave = values => {
     console.log('onFinish', values);
     // call save API
   };
+  const getBrands = async () => {
+    try{
+      setLoading(true);
+      const response = await brandApi.getAll();
+      if(response.status === 200)
+        if(response.data.data)
+          setBrands(response.data.data);
+    }catch(e){
+
+    }finally{
+      setLoading(false);
+    }
+  }
+  const getOrigins = async () => {
+    try{
+      setLoading(true);
+      const response = await originApi.getAll();
+      if(response.status === 200)
+        if(response.data.data)
+          setOrigins(response.data.data);
+    }catch(e){
+     
+    }finally{
+      setLoading(false);
+    }
+  }
+  const getCategories = async () => {
+    try{
+      setLoading(true);
+      const response = await categoryApi.getAllCategory();
+      debugger;
+      if(response.status === 200)
+        if(response.data.data)
+          setCategories(response.data.data);
+    }catch(e){
+      console.log(e);
+    }finally{
+      setLoading(false);
+    }
+  }
+  useEffect(() => {
+    getBrands();
+    getOrigins();
+    getCategories();
+  }, []);
 
   const requiredFieldRule = [{ required: true, message: 'Required Field' }];
-
-  const ownerArray = [
-    {
-      id: 1,
-      value: 'John Nash',
-    },
-    {
-      id: 2,
-      value: 'Leonhard Euler',
-    },
-    {
-      id: 3,
-      value: 'Alan Turing',
-    },
-  ];
-
-  const categoryArray = [
-    {
-      id: 1,
-      value: 'Clothing',
-    },
-    {
-      id: 2,
-      value: 'Jewelery',
-    },
-    {
-      id: 3,
-      value: 'Accessory',
-    },
-  ];
 
   return (
     <Card title="Add Product" loading={false}>
       <Row justify="center">
         <Col span={12}>
           <Form
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 16 }}
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 14 }}
             form={form}
             name="product-form"
             onFinish={handleSave}
           >
-            <Form.Item label="Name" name="name" rules={requiredFieldRule}>
+            <Form.Item hasFeedback label="Name" name="name" rules={requiredFieldRule}>
               <Input />
             </Form.Item>
             <Form.Item label="Description" name="description">
               <Input />
             </Form.Item>
-            <Form.Item label="Owner" name="owner">
-              <Select>
-                {ownerArray.map(item => (
+            <Form.Item hasFeedback label="Detail" name="detail" valuePropName="data" getValueFromEvent={(event, editor) => {
+              const data = editor.getData();
+              return data;
+            }}
+              rules={requiredFieldRule}
+            >
+              <CKEditor plugins={[Base64UploadAdapter]} editor={ClassicEditor} />
+            </Form.Item>
+            <Form.Item hasFeedback label="Brand" name="brandId" rules={requiredFieldRule}>
+              <Select allowClear clearIcon >
+                {brands.map(item => (
                   <Option key={item.id} value={item.id}>
-                    {item.value}
+                    {item.name}
                   </Option>
                 ))}
               </Select>
             </Form.Item>
-            <Form.Item label="Category" name="category">
-              <Select>
-                {categoryArray.map(item => (
+            <Form.Item hasFeedback label="Origin" name="originId" rules={requiredFieldRule}>
+              <Select allowClear clearIcon >
+                {origins.map(item => (
                   <Option key={item.id} value={item.id}>
-                    {item.value}
+                    {item.name}
                   </Option>
                 ))}
               </Select>
             </Form.Item>
-            <Form.Item label="Quantity" name="qty">
+            <Form.Item hasFeedback label="Category" name="categoryId" rules={requiredFieldRule}>
+              <TreeSelect allowClear clearIcon showSearch treeDefaultExpandAll treeData={categories} />
+            </Form.Item>
+            <Form.Item hasFeedback label="Available Quantity" name="availableQuantity" rules={requiredFieldRule}>
               <InputNumber />
             </Form.Item>
-            <Form.Item
+            <Form.Item hasFeedback label="Retail Price" name="retailPrice" rules={requiredFieldRule}>
+              <InputNumber />
+            </Form.Item>
+            <Form.Item hasFeedback label="Whole sale Price" name="wholeSalePrice" rules={requiredFieldRule}>
+              <InputNumber />
+            </Form.Item>
+            <Form.Item hasFeedback label="Retail original Price" name="retailOriginalPrice" rules={requiredFieldRule}>
+              <InputNumber />
+            </Form.Item>
+            <Form.Item hasFeedback label="Whole sale original Price" name="wholeSaleOriginalPrice" rules={requiredFieldRule}>
+              <InputNumber />
+            </Form.Item>
+            <Form.Item hasFeedback label="Sku" name="sku" rules={requiredFieldRule}>
+              <Input />
+            </Form.Item>
+            <Form.Item hasFeedback
               label="Status"
-              name="active"
+              name="status"
               valuePropName="checked"
               initialValue={false}
             >

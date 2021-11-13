@@ -27,6 +27,9 @@ const create = (cat) => {
 const checkUpdateOrderValid = (order,id) => {
     return request().get(`/category/displays/order/checkUpdateOrderValid?order=${order}&id=${id}`);
 }
+const getAllCategory = () => {
+    return request().get(`/category/getAll`);
+}
 export {
     getCategoryByLevel,
     getCategoryByParentId,
@@ -36,5 +39,6 @@ export {
     deleteById,
     checkOrderValid,
     create,
-    checkUpdateOrderValid 
+    checkUpdateOrderValid,
+    getAllCategory
 }
