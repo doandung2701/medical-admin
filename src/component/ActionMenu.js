@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
-function useActionMenu({ selectedRow, updateEntityPath,callbackDelete }) {
+function useActionMenu({ selectedRow, updateEntityPath,callbackDelete,additionActionMenu = null }) {
   const history = useHistory();
   const [selectedDeleteItem, setSelectedDeleteItem] = useState();
   const handleMenuClick = action => {
@@ -22,7 +22,9 @@ function useActionMenu({ selectedRow, updateEntityPath,callbackDelete }) {
     console.log('handleSingleDelete, selected:', selectedRow);
     setSelectedDeleteItem(selectedRow);
   };
-
+ const handleCustomAction = () => {
+  setSelectedDeleteItem(selectedRow);
+ }
   const actionMenu = (
     <Menu onClick={handleMenuClick}>
       <Menu.Item key="edit">

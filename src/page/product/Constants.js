@@ -102,29 +102,5 @@ export const columns = [
         );
       }
     },
-  },
-  // {
-  //   title: 'Category',
-  //   key: 'category',
-  //   dataIndex: 'category',
-  //   render: tags => (
-  //     <>
-  //       {tags.map(tag => {
-  //         let color = 'blue';
-  //         if (tag === 'accessory') {
-  //           color = 'volcano';
-  //         } else if (tag === 'clothing') {
-  //           color = 'geekblue';
-  //         } else if (tag === 'jewellery') {
-  //           color = 'green';
-  //         }
-  //         return (
-  //           <Tag color={color} key={tag}>
-  //             {tag.toUpperCase()}
-  //           </Tag>
-  //         );
-  //       })}
-  //     </>
-  //   ),
-  // },
+  }
 ];

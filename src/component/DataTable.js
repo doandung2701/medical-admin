@@ -5,12 +5,12 @@ import { DEFAULT_LIMIT_SIZE } from '../globalConstants';
 
 const DEFAULT_PAGE_NUMBER = 0;
 
-function useDataTable({ columns, dataSource, updateEntityPath, total, loading = false }) {
+function useDataTable({ columns, dataSource, updateEntityPath, total, loading = false,additionActionMenu = null }) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [selectedRow, setSelectedRow] = useState(null);
   const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE_NUMBER);
   const [pageSize, setPageSize] = useState(DEFAULT_LIMIT_SIZE);
-  const [actionColumnView, deleteItem] = useActionMenu({ selectedRow, updateEntityPath });
+  const [actionColumnView, deleteItem,handleCustomAction] = useActionMenu({ selectedRow, updateEntityPath,additionActionMenu });
 
   const hasSelected = selectedRowKeys.length > 0;
 
@@ -45,6 +45,7 @@ function useDataTable({ columns, dataSource, updateEntityPath, total, loading = 
       rowSelection={rowSelection}
       columns={updatedColumns}
       dataSource={dataSource}
+      scroll={{ x: 1500 }}
       onRow={record => {
         return {
           onClick: () => {
@@ -72,7 +73,8 @@ function useDataTable({ columns, dataSource, updateEntityPath, total, loading = 
     currentPage,
     pageSize,
     resetPagination,
-    deleteItem
+    deleteItem,
+    handleCustomAction
   };
 }
 

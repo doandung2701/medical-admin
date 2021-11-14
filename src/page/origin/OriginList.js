@@ -62,7 +62,6 @@ export default function OriginList(props) {
                 });
                 if(response && response.status === 206){
                    const totalCount= response.headers['x-total-count'];
-                   console.log(totalCount);
                    const data = response.data.data;
                    setTotal(totalCount);
                    setData(data);

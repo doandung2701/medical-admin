@@ -12,6 +12,7 @@ import BrandForm from '../page/brand/BrandForm';
 import OriginList from '../page/origin/OriginList';
 import OriginForm from '../page/origin/OriginForm';
 import BannerForm from '../page/banner/BannerForm';
+import ProductDetail from '../page/product/ProductDetail';
 
 const routes = [
   {
@@ -33,6 +34,11 @@ const routes = [
     path: '/add-product',
     component: AddProduct,
     key: '/add-product',
+  },
+  {
+    path: '/products/:id',
+    component: ProductDetail,
+    key: '/products/:id',
   },
   {
     path: '/categories',
