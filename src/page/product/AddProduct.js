@@ -10,7 +10,8 @@ import {
   Divider,
   Button,
   InputNumber,
-  TreeSelect
+  TreeSelect,
+  message
 } from 'antd';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -18,7 +19,8 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as categoryApi from '../../api/categoryApi';
 import * as originApi from '../../api/originApi';
 import * as brandApi from '../../api/brandApi';
-
+import * as productAPi from '../../api/productApi';
+import { useHistory } from 'react-router';
 const { Option } = Select;
 
 function AddProduct() {
@@ -27,9 +29,33 @@ function AddProduct() {
   const [brands, setBrands] = useState([]);
   const [origins, setOrigins] = useState([]);
   const [loading, setLoading] = useState(false);
-  const handleSave = values => {
+  const [isRedirect, setIsRedirect] = useState(false);
+  const history = useHistory();
+  const handleSave = async values => {
     console.log('onFinish', values);
     // call save API
+    try{
+      setLoading(true);
+      const {status}  = values;
+      if(status){
+        values.status = 1;
+      }else{
+        values.status = 0;
+      }
+      const response = await productAPi.create(values);
+      if(response.status === 201){
+        message.success('Add product success');
+        setIsRedirect(true);
+      }
+    }catch(e){
+      if (e.response.data?.message) {
+        message.error(e.response.data.message);
+    } else {
+        message.error('Add product error');
+    }
+    }finally{
+      setLoading(false);
+    }
   };
   const getBrands = async () => {
     try{
@@ -44,6 +70,11 @@ function AddProduct() {
       setLoading(false);
     }
   }
+  useEffect(() => {
+    if (isRedirect) {
+        history.push('/products');
+    }
+}, [isRedirect]);
   const getOrigins = async () => {
     try{
       setLoading(true);
@@ -80,7 +111,7 @@ function AddProduct() {
   const requiredFieldRule = [{ required: true, message: 'Required Field' }];
 
   return (
-    <Card title="Add Product" loading={false}>
+    <Card title="Add Product" loading={loading}>
       <Row justify="center">
         <Col span={24}>
           <Form
@@ -93,7 +124,7 @@ function AddProduct() {
             <Form.Item hasFeedback label="Name" name="name" rules={requiredFieldRule}>
               <Input />
             </Form.Item>
-            <Form.Item label="Description" name="description">
+            <Form.Item label="Description" name="description" rules={requiredFieldRule}>
               <Input />
             </Form.Item>
             <Form.Item hasFeedback label="Detail" name="detail" valuePropName="data" getValueFromEvent={(event, editor) => {
@@ -132,19 +163,19 @@ function AddProduct() {
               <TreeSelect allowClear clearIcon showSearch treeDefaultExpandAll treeData={categories} />
             </Form.Item>
             <Form.Item hasFeedback label="Available Quantity" name="availableQuantity" rules={requiredFieldRule}>
-              <InputNumber />
+              <InputNumber style={{width:'100%'}} />
             </Form.Item>
             <Form.Item hasFeedback label="Retail Price" name="retailPrice" rules={requiredFieldRule}>
-              <InputNumber />
+              <InputNumber style={{width:'100%'}}/>
             </Form.Item>
             <Form.Item hasFeedback label="Whole sale Price" name="wholeSalePrice" rules={requiredFieldRule}>
-              <InputNumber />
+              <InputNumber style={{width:'100%'}}/>
             </Form.Item>
             <Form.Item hasFeedback label="Retail original Price" name="retailOriginalPrice" rules={requiredFieldRule}>
-              <InputNumber />
+              <InputNumber style={{width:'100%'}}/>
             </Form.Item>
             <Form.Item hasFeedback label="Whole sale original Price" name="wholeSaleOriginalPrice" rules={requiredFieldRule}>
-              <InputNumber />
+              <InputNumber style={{width:'100%'}}/>
             </Form.Item>
             <Form.Item hasFeedback label="Sku" name="sku" rules={requiredFieldRule}>
               <Input />
@@ -153,7 +184,7 @@ function AddProduct() {
               label="Status"
               name="status"
               valuePropName="checked"
-              initialValue={false}
+              initialValue={true}
             >
               <Switch
                 checkedChildren={<CheckOutlined />}

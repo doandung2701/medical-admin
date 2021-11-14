@@ -4,8 +4,8 @@ import { Tag } from 'antd';
 export const columns = [
   {
     title: 'Id',
-    dataIndex: 'key',
-    key: 'key',
+    dataIndex: 'id',
+    key: 'id',
   },
   {
     title: 'Name',
@@ -19,107 +19,112 @@ export const columns = [
     key: 'description',
   },
   {
-    title: 'Quantity',
-    dataIndex: 'qty',
-    key: 'qty',
-  },
-  {
-    title: 'owner',
-    dataIndex: 'owner',
-    key: 'owner',
+    title: 'Brand',
+    dataIndex: 'brand',
+    key: 'brand',
   },
   {
     title: 'Category',
-    key: 'category',
     dataIndex: 'category',
-    render: tags => (
-      <>
-        {tags.map(tag => {
-          let color = 'blue';
-          if (tag === 'accessory') {
-            color = 'volcano';
-          } else if (tag === 'clothing') {
-            color = 'geekblue';
-          } else if (tag === 'jewellery') {
-            color = 'green';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
+    key: 'category',
   },
+  {
+    title: 'Available quantity',
+    dataIndex: 'avalilableQuantity',
+    key: 'avalilableQuantity',
+  },
+  {
+    title: 'Retail price',
+    dataIndex: 'retailPrice',
+    key: 'retailPrice',
+  },
+  {
+    title: 'Whole sale price',
+    dataIndex: 'wholeSalePrice',
+    key: 'wholeSalePrice',
+  },
+  {
+    title: 'Original retail price',
+    dataIndex: 'originalRetailPrice',
+    key: 'originalRetailPrice',
+  },
+  {
+    title: 'Original whole sale price',
+    dataIndex: 'originalWholeSalePrice',
+    key: 'originalWholeSalePrice',
+  },
+  {
+    title: 'Origin',
+    dataIndex: 'origin',
+    key: 'origin',
+  },
+  {
+    title: 'Sku',
+    dataIndex: 'sku',
+    key: 'sku',
+  },
+  {
+    title: 'Create User',
+    dataIndex: 'createUser',
+    key: 'createUser',
+  },
+  {
+    title: 'Create Time',
+    dataIndex: 'createTime',
+    key: 'createTime',
+  },
+  {
+    title: 'Update User',
+    dataIndex: 'updateUser',
+    key: 'updateUser',
+  },
+  {
+    title: 'Update Time',
+    dataIndex: 'updateTime',
+    key: 'updateTime',
+  },
+  {
+    title: 'Status',
+    key: 'status',
+    dataIndex: 'status',
+    render: status => {
+      if(status == 1){
+        return (
+          <Tag color={'green'}>
+            Active
+          </Tag>
+        );
+      }else{
+        return (
+          <Tag color={'red'}>
+            Disable
+          </Tag>
+        );
+      }
+    },
+  },
+  // {
+  //   title: 'Category',
+  //   key: 'category',
+  //   dataIndex: 'category',
+  //   render: tags => (
+  //     <>
+  //       {tags.map(tag => {
+  //         let color = 'blue';
+  //         if (tag === 'accessory') {
+  //           color = 'volcano';
+  //         } else if (tag === 'clothing') {
+  //           color = 'geekblue';
+  //         } else if (tag === 'jewellery') {
+  //           color = 'green';
+  //         }
+  //         return (
+  //           <Tag color={color} key={tag}>
+  //             {tag.toUpperCase()}
+  //           </Tag>
+  //         );
+  //       })}
+  //     </>
+  //   ),
+  // },
 ];
-
-export const data = {
-  totalElements: 8,
-  content: [
-    {
-      key: '1',
-      name: 'Personalized Bar Bracelet',
-      description: 'This is a metal bracelet',
-      qty: 32,
-      owner: 'John Brown',
-      category: ['jewellery', 'accessory'],
-    },
-    {
-      key: '2',
-      name: 'Handcraft Boots',
-      description: 'Vegan-friendly leather',
-      qty: 12,
-      owner: 'John Green',
-      category: ['clothing', 'living'],
-    },
-    {
-      key: '3',
-      name: 'Personalized Bar Bracelet',
-      description: 'This is a metal bracelet',
-      qty: 32,
-      owner: 'John Brown',
-      category: ['jewellery', 'clothing'],
-    },
-    {
-      key: '4',
-      name: 'Winter Hat',
-      description: 'Unisex wool hat',
-      qty: 21,
-      owner: 'John Smith',
-      category: ['clothing', 'home'],
-    },
-    {
-      key: '5',
-      name: 'Personalized Bar Bracelet',
-      description: 'This is a metal bracelet',
-      qty: 32,
-      owner: 'John Brown',
-      category: ['jewellery', 'clothing'],
-    },
-    {
-      key: '6',
-      name: 'Handcraft Boots',
-      description: 'Vegan-friendly leather',
-      qty: 12,
-      owner: 'John Green',
-      category: ['clothing', 'accessory'],
-    },
-    {
-      key: '7',
-      name: 'Personalized Bar Bracelet',
-      description: 'This is a metal bracelet',
-      qty: 32,
-      owner: 'John Brown',
-      category: ['jewellery', 'clothing'],
-    },
-    {
-      key: '8',
-      name: 'Winter Hat',
-      description: 'Unisex wool hat',
-      qty: 21,
-      owner: 'John Smith',
-      category: ['clothing', 'accessory'],
-    },
-  ],
-};
