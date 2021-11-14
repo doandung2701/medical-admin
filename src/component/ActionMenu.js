@@ -11,8 +11,9 @@ import { useHistory } from 'react-router-dom';
 function useActionMenu({ selectedRow, updateEntityPath,callbackDelete,additionActionMenu = null }) {
   const history = useHistory();
   const [selectedDeleteItem, setSelectedDeleteItem] = useState();
-  const handleMenuClick = action => {
-    if (action.key === 'edit') {
+  const handleMenuClick = ({ item, key, keyPath, domEvent }) => {
+    debugger;
+    if (key === 'edit') {
       const updatePath = '/' + updateEntityPath + '/' + selectedRow.id;
       history.push(updatePath);
     }
@@ -47,7 +48,7 @@ function useActionMenu({ selectedRow, updateEntityPath,callbackDelete,additionAc
 
   const actionColumnView = (
     <span>
-      <Dropdown overlay={actionMenu} trigger={['click']}>
+      <Dropdown overlay={actionMenu} trigger={['click']} arrow>
         <a className="ant-dropdown-link" href="#">
           Actions <DownOutlined />
         </a>

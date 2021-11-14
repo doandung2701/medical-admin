@@ -45,13 +45,13 @@ export const columns = [
   },
   {
     title: 'Original retail price',
-    dataIndex: 'originalRetailPrice',
-    key: 'originalRetailPrice',
+    dataIndex: 'retailOriginalPrice',
+    key: 'retailOriginalPrice',
   },
   {
     title: 'Original whole sale price',
-    dataIndex: 'originalWholeSalePrice',
-    key: 'originalWholeSalePrice',
+    dataIndex: 'wholeSaleOriginalPrice',
+    key: 'wholeSaleOriginalPrice',
   },
   {
     title: 'Origin',

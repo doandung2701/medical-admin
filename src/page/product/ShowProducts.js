@@ -41,11 +41,30 @@ function ShowProducts() {
     total,
     loading
   });
-  const redirectToAddPhoto = () =>{
-    debugger;
-    handleCustomAction();
-    console.log(deleteItem);
-  }
+  const hanldeDelete = async (selectedRow) => {
+    try {
+        setLoading(true);
+        const response = await productAPi.softDeleteById(selectedRow.id);
+        if(response && response.status === 200){
+            let selectedId = data.findIndex(x => x.id === selectedRow.id);
+            if(selectedId !== -1){
+                data[selectedId] = {
+                    ...data[selectedId],
+                    status: 0
+                }
+                setData([...data]);
+            }
+        }
+    } catch (e) {
+        if(e.response.data?.message){
+            message.error(e.response.data.message);
+        }else{
+            message.error('Error when delete brand');
+        }
+    }finally{
+        setLoading(false);
+    }
+}
   const handleSearch = async (values) => {
     console.log(values);
     values['offset'] = currentPage * pageSize;
@@ -113,7 +132,10 @@ function ShowProducts() {
     getOrigins();
     getCategories();
   }, []);
-  
+  useEffect(() => {
+    if(deleteItem)
+        hanldeDelete(deleteItem);
+}, [deleteItem]);
   return (
     <>
       <Row>
@@ -126,7 +148,7 @@ function ShowProducts() {
           >
             Add New
           </Button>
-          <Button
+          {/* <Button
             icon={<DeleteOutlined />}
             disabled={!hasSelected}
             style={{ float: 'right', marginRight: 12 }}
@@ -138,7 +160,7 @@ function ShowProducts() {
             >
               Delete
             </Popconfirm>
-          </Button>
+          </Button> */}
         </Col>
       </Row>
       <Row>
