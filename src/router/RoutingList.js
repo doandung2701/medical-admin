@@ -13,6 +13,8 @@ import OriginList from '../page/origin/OriginList';
 import OriginForm from '../page/origin/OriginForm';
 import BannerForm from '../page/banner/BannerForm';
 import ProductDetail from '../page/product/ProductDetail';
+import OrderList from '../page/order/OrderList';
+import OrderDetail from '../page/order/OrderDetail';
 
 const routes = [
   {
@@ -89,6 +91,16 @@ const routes = [
     path: '/banners',
     component: BannerForm,
     key: '/banners',
+  },
+  {
+    path: '/orders',
+    component: OrderList,
+    key: '/orders',
+  },
+  {
+    path: '/orders/:id',
+    component: OrderDetail,
+    key: '/orders/:id',
   }
 ];
 

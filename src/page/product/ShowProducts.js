@@ -133,6 +133,10 @@ function ShowProducts() {
     getCategories();
   }, []);
   useEffect(() => {
+    form.submit();
+    // handleSearch()
+}, [currentPage,pageSize]);
+  useEffect(() => {
     if(deleteItem)
         hanldeDelete(deleteItem);
 }, [deleteItem]);

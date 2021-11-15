@@ -48,6 +48,9 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
       case 'showBanners':
         history.push('/banners');
         break;
+      case 'showOrder':
+        history.push('/orders');  
+        break;
       default:
         history.push('/');
     }
@@ -144,6 +147,12 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           <span>
             <TeamOutlined />
             <span>Banner</span>
+          </span>
+        </Menu.Item>
+        <Menu.Item key="showOrder">
+          <span>
+            <TeamOutlined />
+            <span>Order</span>
           </span>
         </Menu.Item>
         {/* <Menu.Item key="settings">
