@@ -15,7 +15,7 @@ export const PrivateRoute = ({ component: C, ...props }) => {
       {...props}
       render={routeProps =>
         // eslint-disable-next-line react/jsx-props-no-spreading
-        auth != null && auth.uid != null && profile.token?.claims['ROLE_SUPER'] === true ? <C {...routeProps} /> : <Redirect to="/login" />
+        auth != null && auth.uid != null && profile?.token?.claims['ROLE_SUPER'] === true ? <C {...routeProps} /> : <Redirect to="/login" />
       }
     />
   );

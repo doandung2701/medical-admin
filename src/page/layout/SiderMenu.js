@@ -7,6 +7,11 @@ import {
   PartitionOutlined,
   SettingOutlined,
   TeamOutlined,
+  DiffOutlined,
+  FileImageOutlined,
+  SnippetsOutlined,
+  SwitcherOutlined,
+  HddOutlined
 } from '@ant-design/icons';
 import './Style.less';
 
@@ -90,7 +95,7 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           key="products"
           title={
             <span>
-              <PartitionOutlined />
+              <HddOutlined />
               <span>Products</span>
             </span>
           }
@@ -106,7 +111,7 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           key="brands"
           title={
             <span>
-              <TeamOutlined />
+              <SwitcherOutlined />
               <span>Brands</span>
             </span>
           }
@@ -119,7 +124,7 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           key="origins"
           title={
             <span>
-              <TeamOutlined />
+              <SnippetsOutlined />
               <span>Origins</span>
             </span>
           }
@@ -130,13 +135,13 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
         </SubMenu>
         <Menu.Item key="showBanners">
           <span>
-            <TeamOutlined />
+          <FileImageOutlined />
             <span>Banner</span>
           </span>
         </Menu.Item>
         <Menu.Item key="showOrder">
           <span>
-            <TeamOutlined />
+            <DiffOutlined />
             <span>Order</span>
           </span>
         </Menu.Item>
