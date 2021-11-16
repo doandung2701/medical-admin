@@ -7,7 +7,11 @@ const query = (query) =>{
 const getDetailById = (id) => {
     return request().get(`/order/${id}`);
 } 
+const updateState = (id,state) => {
+    return request().put(`/order/${id}/state/${state}`);
+}
 export {
     query,
-    getDetailById
+    getDetailById,
+    updateState
 }

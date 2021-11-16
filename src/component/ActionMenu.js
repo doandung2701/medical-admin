@@ -30,7 +30,7 @@ function useActionMenu({ selectedRow, updateEntityPath,callbackDelete,additionAc
     <Menu onClick={handleMenuClick}>
       <Menu.Item key="edit">
         <EditOutlined />
-        Update
+        Update/View Detail
       </Menu.Item>
       <Menu.Item key="delete">
         <Popconfirm

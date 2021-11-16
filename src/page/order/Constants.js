@@ -106,26 +106,26 @@ export const columns = [
     dataIndex: 'shippingFee',
     key: 'shippingFee',
   },
-  {
-    title: 'Create User',
-    dataIndex: 'createUser',
-    key: 'createUser',
-  },
-  {
-    title: 'Create Time',
-    dataIndex: 'createTime',
-    key: 'createTime',
-  },
-  {
-    title: 'Update User',
-    dataIndex: 'updateUser',
-    key: 'updateUser',
-  },
-  {
-    title: 'Update Time',
-    dataIndex: 'updateTime',
-    key: 'updateTime',
-  },
+  // {
+  //   title: 'Create User',
+  //   dataIndex: 'createUser',
+  //   key: 'createUser',
+  // },
+  // {
+  //   title: 'Create Time',
+  //   dataIndex: 'createTime',
+  //   key: 'createTime',
+  // },
+  // {
+  //   title: 'Update User',
+  //   dataIndex: 'updateUser',
+  //   key: 'updateUser',
+  // },
+  // {
+  //   title: 'Update Time',
+  //   dataIndex: 'updateTime',
+  //   key: 'updateTime',
+  // },
   {
     title: 'Status',
     key: 'status',

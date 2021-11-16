@@ -9,13 +9,13 @@ import 'firebase/firestore';
 
 // Your app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyC9HYL9aBFdXaBEzD2_JYnAXryYldJYr8U',
-  authDomain: 'authentication-d5eec.firebaseapp.com',
-  databaseURL: 'https://authentication-d5eec.firebaseio.com',
-  projectId: 'authentication-d5eec',
-  storageBucket: 'authentication-d5eec.appspot.com',
-  messagingSenderId: '720129545652',
-  appId: '1:720129545652:web:7fb593c36603939d824ee1',
+  apiKey: "AIzaSyCsp5rP7pJCeqTR2YxxH9tLCErtpK_SSyQ",
+  authDomain: "medicine-c54e8.firebaseapp.com",
+  projectId: "medicine-c54e8",
+  storageBucket: "medicine-c54e8.appspot.com",
+  messagingSenderId: "146585992764",
+  appId: "1:146585992764:web:81b62eaa5940379fdc8d39",
+  measurementId: "G-ETNXH96NYQ"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

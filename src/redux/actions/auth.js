@@ -69,17 +69,19 @@ import {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(data => {
-          if (data.user.emailVerified) {
-            console.log("IF", data.user.emailVerified);
-            dispatch({ type: SIGNIN_SUCCESS });
-            callback();
-          } else {
-            console.log("ELSE", data.user.emailVerified);
-            dispatch({
-              type: EMAIL_NOT_VERIFIED,
-              payload: "You haven't verified your e-mail address."
-            });
-          }
+          dispatch({ type: SIGNIN_SUCCESS });
+          callback();
+          // if (data.user.emailVerified) {
+          //   console.log("IF", data.user.emailVerified);
+          //   dispatch({ type: SIGNIN_SUCCESS });
+          //   callback();
+          // } else {
+          //   console.log("ELSE", data.user.emailVerified);
+          //   dispatch({
+          //     type: EMAIL_NOT_VERIFIED,
+          //     payload: "You haven't verified your e-mail address."
+          //   });
+          // }
         })
         .catch(() => {
           dispatch(apiCallError());

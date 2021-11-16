@@ -42,6 +42,7 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
         break;
       case 'showBrands':
         history.push('/brands');
+        break;
       case 'showOrigins':
         history.push('/origins');
         break;
@@ -99,22 +100,6 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           </Menu.Item>
           <Menu.Item key="addProduct">
             <span className="nav-text">Add Product</span>
-          </Menu.Item>
-        </SubMenu>
-        <SubMenu
-          key="customers"
-          title={
-            <span>
-              <TeamOutlined />
-              <span>Customers</span>
-            </span>
-          }
-        >
-          <Menu.Item key="showCustomers">
-            <span className="nav-text">Show Customers</span>
-          </Menu.Item>
-          <Menu.Item key="addCustomer">
-            <span className="nav-text">Add Customer</span>
           </Menu.Item>
         </SubMenu>
         <SubMenu
