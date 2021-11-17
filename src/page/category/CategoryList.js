@@ -71,7 +71,6 @@ function CategoryList(props) {
     const getCategoryByLevel = async () => {
       try {
         const response = await categoryApi.getCategoryByLevel(1);
-        console.log(response);
         if (response.status === 200) {
           setData(transformData(response.data.data));
         }

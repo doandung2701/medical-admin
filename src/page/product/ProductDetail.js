@@ -37,7 +37,6 @@ function ProductDetail() {
   const [isReady, setIsReady] = useState(false);
 
   const handleSave = async values => {
-    console.log('onFinish', values);
     // call save API
     try {
       setLoading(true);
@@ -101,7 +100,6 @@ function ProductDetail() {
         if (response.data.data)
           setCategories(response.data.data);
     } catch (e) {
-      console.log(e);
     } finally {
       setLoading(false);
     }
@@ -118,7 +116,6 @@ function ProductDetail() {
         }
 
     } catch (e) {
-      console.log(e);
     } finally {
       setLoading(false);
     }

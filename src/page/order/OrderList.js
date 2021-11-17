@@ -60,7 +60,6 @@ function OrderList() {
         }
     }
     const handleSearch = async (values) => {
-        console.log(values);
         values['offset'] = currentPage * pageSize;
         values['limit'] = pageSize;
         try {
@@ -69,12 +68,10 @@ function OrderList() {
             if (response && response.status === 206) {
                 const totalCount = response.headers['x-total-count'];
                 const data = response.data.data;
-                console.log(data);
                 setTotal(totalCount);
                 setData(data);
             }
         } catch (e) {
-            console.log(e);
         } finally {
             setLoading(false);
         }

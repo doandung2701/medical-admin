@@ -36,11 +36,9 @@ export default function BannerForm(props) {
                 fmData,
                 config
             );
-            console.log("server res: ", res);
 
             onSuccess(res.data.data);
         } catch (err) {
-            console.log("Eroor: ", err);
             const error = new Error("Some error");
             onError({ err });
         }
@@ -54,7 +52,6 @@ export default function BannerForm(props) {
         setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
     };
     const  handleSave = async () =>{
-        console.log(banners);
         if(banners.length ==0 )
         {
             message.error('Banner can not be empty');

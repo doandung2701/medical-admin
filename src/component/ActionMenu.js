@@ -12,7 +12,6 @@ function useActionMenu({ selectedRow, updateEntityPath,callbackDelete,additionAc
   const history = useHistory();
   const [selectedDeleteItem, setSelectedDeleteItem] = useState();
   const handleMenuClick = ({ item, key, keyPath, domEvent }) => {
-    debugger;
     if (key === 'edit') {
       const updatePath = '/' + updateEntityPath + '/' + selectedRow.id;
       history.push(updatePath);
@@ -20,7 +19,6 @@ function useActionMenu({ selectedRow, updateEntityPath,callbackDelete,additionAc
   };
 
   const handleSingleDelete = () => {
-    console.log('handleSingleDelete, selected:', selectedRow);
     setSelectedDeleteItem(selectedRow);
   };
  const handleCustomAction = () => {

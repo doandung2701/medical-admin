@@ -26,7 +26,6 @@ export default function BrandForm(props){
         try{
             setLoading(true);
             const response = await brandApi.create(data);
-            console.log(response);
             if(response.status === 201){
                 message.success('Add brand success');
                 setIsRedirect(true);
@@ -46,7 +45,6 @@ export default function BrandForm(props){
         try{
             setLoading(true);
             const response = await brandApi.updateById(id,data);
-            console.log(response);
             if(response.status === 200){
                 message.success('Update brand success');
                 setIsRedirect(true);
@@ -63,7 +61,6 @@ export default function BrandForm(props){
         }
     }
     const handleSave = async (values) => {
-        console.log('onFinish', values);
         // call save API
         if(isUpdate){
             updateData(values);

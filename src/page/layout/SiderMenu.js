@@ -25,7 +25,6 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
   const history = useHistory();
 
   const handleSiderMenuClick = action => {
-    console.log('menu:', action);
     switch (action.key) {
       case 'dashboard':
         history.push('/');
@@ -57,6 +56,9 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
       case 'showOrder':
         history.push('/orders');  
         break;
+        case 'showBlogs':
+        history.push('/blogs');  
+        break;  
       default:
         history.push('/');
     }
@@ -145,6 +147,13 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
             <span>Order</span>
           </span>
         </Menu.Item>
+        <Menu.Item key="showBlogs">
+          <span>
+            <DiffOutlined />
+            <span>Blog</span>
+          </span>
+        </Menu.Item>
+        
         {/* <Menu.Item key="settings">
           <SettingOutlined />
           <span className="nav-text">Settings</span>

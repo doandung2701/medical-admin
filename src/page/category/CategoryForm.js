@@ -59,12 +59,10 @@ export default function CategoryForm(props) {
         }
     }
     const handleUpdate = async values => {
-        console.log(values);
         const { name, description, slug, displaySeqNo } = values;
         try {
             await categoryApi.checkUpdateOrderValid(displaySeqNo, id);
         } catch (e) {
-            console.log(e);
             message.error('Duplicate order');
             return ;
         }
@@ -138,10 +136,8 @@ export default function CategoryForm(props) {
             );
 
             onSuccess("Ok");
-            console.log("server res: ", res);
             setphoto(res.data.data);
         } catch (err) {
-            console.log("Eroor: ", err);
             const error = new Error("Some error");
             onError({ err });
         }
@@ -164,13 +160,10 @@ export default function CategoryForm(props) {
             try {
                 setLoading(true);
                 const response = await categoryApi.getCategoryDetailById(id);
-                // console.log(response);
-                debugger;
                 form.setFieldsValue(response.data.data);
                 if (response.data.data.photo)
                     setphoto(response.data.data.photo);
             } catch (e) {
-                console.log(e);
                 if (e.response?.data?.message) {
                     message.error(e.response.data.message);
                 } else {

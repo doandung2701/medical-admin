@@ -15,6 +15,8 @@ import BannerForm from '../page/banner/BannerForm';
 import ProductDetail from '../page/product/ProductDetail';
 import OrderList from '../page/order/OrderList';
 import OrderDetail from '../page/order/OrderDetail';
+import BlogList from '../page/blog/BlogList';
+import BlogForm from '../page/blog/BlogForm';
 
 const routes = [
   {
@@ -101,6 +103,21 @@ const routes = [
     path: '/orders/:id',
     component: OrderDetail,
     key: '/orders/:id',
+  },
+  {
+    path: '/blogs',
+    component: BlogList,
+    key: '/blogs',
+  },
+  {
+    path: '/add-blog',
+    component: BlogForm,
+    key: '/add-blog',
+  },
+  {
+    path: '/blogs/:id',
+    component: BlogForm,
+    key: '/blogs/:id',
   }
 ];
 

@@ -26,7 +26,6 @@ export default function OriginForm(props){
         try{
             setLoading(true);
             const response = await originApi.create(data);
-            console.log(response);
             if(response.status === 201){
                 message.success('Add origin success');
                 setIsRedirect(true);
@@ -46,7 +45,6 @@ export default function OriginForm(props){
         try{
             setLoading(true);
             const response = await originApi.updateById(id,data);
-            console.log(response);
             if(response.status === 200){
                 message.success('Update origin success');
                 setIsRedirect(true);
@@ -63,7 +61,6 @@ export default function OriginForm(props){
         }
     }
     const handleSave = async (values) => {
-        console.log('onFinish', values);
         // call save API
         if(isUpdate){
             updateData(values);

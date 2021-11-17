@@ -34,7 +34,6 @@ function useDataTable({ columns, dataSource, updateEntityPath, total, loading = 
   };
 
   const handleTableChange = pagination => {
-    console.log('pagination:', pagination);
     setCurrentPage(pagination.current - 1);
   };
 

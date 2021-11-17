@@ -67,7 +67,6 @@ export default function OriginList(props) {
                    setData(data);
                 }
             } catch (e) {
-                console.log(e);
             }finally{
                 setLoading(false);
             }

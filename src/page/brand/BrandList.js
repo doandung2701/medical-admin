@@ -57,13 +57,11 @@ export default function BrandList(props) {
                 const response = await brandApi.query(name, currentPage * pageSize, pageSize);
                 if(response && response.status === 206){
                    const totalCount= response.headers['x-total-count'];
-                   console.log(totalCount);
                    const data = response.data.data;
                    setTotal(totalCount);
                    setData(data);
                 }
             } catch (e) {
-                console.log(e);
             }finally{
                 setLoading(false);
             }

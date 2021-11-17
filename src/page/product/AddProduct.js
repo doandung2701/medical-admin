@@ -92,12 +92,10 @@ function AddProduct() {
     try{
       setLoading(true);
       const response = await categoryApi.getAllCategory();
-      debugger;
       if(response.status === 200)
         if(response.data.data)
           setCategories(response.data.data);
     }catch(e){
-      console.log(e);
     }finally{
       setLoading(false);
     }
