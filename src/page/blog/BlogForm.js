@@ -20,6 +20,8 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 
 import { useHistory, useLocation, useParams } from 'react-router';
 import request from '../../api/baseApi';
+import './Style.less';
+
 export default function BlogForm(props) {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
