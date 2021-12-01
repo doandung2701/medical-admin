@@ -153,7 +153,12 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
             <span>Blog</span>
           </span>
         </Menu.Item>
-        
+        <Menu.Item key="showCustomers">
+          <span>
+            <DiffOutlined />
+            <span>Customer</span>
+          </span>
+        </Menu.Item>
         {/* <Menu.Item key="settings">
           <SettingOutlined />
           <span className="nav-text">Settings</span>
