@@ -8,18 +8,18 @@ export const columns = [
     key: 'id',
   },
   {
-    title: 'Order Number',
+    title: 'Mã đơn hàng',
     dataIndex: 'orderNumber',
     key: 'orderNumber',
     render: text => <a>{text}</a>,
   },
   {
-    title: 'Customer name',
+    title: 'Tên khách',
     dataIndex: 'customerName',
     key: 'customerName',
   },
   {
-    title: 'State',
+    title: 'Trạng thái đơn',
     dataIndex: 'state',
     key: 'state',
     render: state => {
@@ -57,12 +57,12 @@ export const columns = [
     },
   },
   {
-    title: 'Item count',
+    title: 'Số lượng sản phẩm',
     dataIndex: 'itemsCount',
     key: 'itemsCount',
   },
   {
-    title: 'Payment method',
+    title: 'Phương thức thanh toán',
     dataIndex: 'payMethod',
     key: 'payMethod',
     render: payMethod => {
@@ -87,22 +87,22 @@ export const columns = [
     key: 'email',
   },
   {
-    title: 'Address',
+    title: 'Địa chỉ',
     dataIndex: 'address',
     key: 'address',
   },
   {
-    title: 'Note',
+    title: 'Ghi chú',
     dataIndex: 'note',
     key: 'note',
   },
   {
-    title: 'Price',
+    title: 'Giá',
     dataIndex: 'price',
     key: 'price',
   },
   {
-    title: 'Shipping Fee',
+    title: 'Phí ship',
     dataIndex: 'shippingFee',
     key: 'shippingFee',
   },
@@ -127,7 +127,7 @@ export const columns = [
   //   key: 'updateTime',
   // },
   {
-    title: 'Status',
+    title: 'Trạng thái',
     key: 'status',
     dataIndex: 'status',
     render: status => {

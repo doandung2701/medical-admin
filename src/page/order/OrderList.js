@@ -53,7 +53,7 @@ function OrderList() {
             if (e.response.data?.message) {
                 message.error(e.response.data.message);
             } else {
-                message.error('Error when delete brand');
+                message.error('Lỗi khi xóa đơn hàng');
             }
         } finally {
             setLoading(false);
@@ -94,7 +94,7 @@ function OrderList() {
                         style={{ float: 'right' }}
                         onClick={handleAddNew}
                     >
-                        Add New
+                        Thêm mới
                     </Button> */}
                 </Col>
             </Row>
@@ -104,22 +104,22 @@ function OrderList() {
                     className="ant-advanced-search-form"
                     form={form}
                     onFinish={handleSearch}
-                    labelCol={{ span: 6 }}
-                    wrapperCol={{ span: 18 }}
+                    labelCol={{ span: 7 }}
+                    wrapperCol={{ span: 17 }}
                 >
                     <Row>
                         <Col span={8}>
-                            <Form.Item label="Order number" name="orderNumber">
+                            <Form.Item label="Mã đơn hàng" name="orderNumber">
                                 <Input />
                             </Form.Item>
                         </Col>
                         <Col span={8}>
-                            <Form.Item label="Customer name" name="customerName">
+                            <Form.Item label="Tên khách hàng" name="customerName">
                                 <Input />
                             </Form.Item>
                         </Col>
                         <Col span={8}>
-                            <Form.Item label="State" name="state">
+                            <Form.Item label="Trạng thái đơn" name="state">
                                 <Select allowClear clearIcon >
                                     <Option value={'CREATED'}>
                                         Mới tạo
@@ -140,7 +140,7 @@ function OrderList() {
                             </Form.Item>
                         </Col>
                         <Col span={8}>
-                            <Form.Item label="Payment method" name="paymentMethod">
+                            <Form.Item label="Phương thức thanh toán" name="paymentMethod">
                                 <Select allowClear clearIcon >
                                     <Option value={'DELIVERY'}>
                                         Qua đơn vị giao vận
@@ -154,7 +154,7 @@ function OrderList() {
                         <Col span={8}></Col>
                         <Col span={8} style={{ display: 'flex', flexDirection: 'row-reverse' }}>
                             <Button type="primary" htmlType="submit">
-                                Search
+                                Tìm kiếm
                             </Button>
                         </Col>
                     </Row>

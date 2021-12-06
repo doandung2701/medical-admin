@@ -26,7 +26,7 @@ export default function BlogForm(props) {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [isRedirect, setIsRedirect] = useState(false);
-  const requiredFieldRule = [{ required: true, message: 'Required Field' }];
+  const requiredFieldRule = [{ required: true, message: 'Không được để trống' }];
   const history = useHistory();
   const [isUpdate, setIsUpdate] = useState(false);
   const [photo, setphoto] = useState();
@@ -37,14 +37,14 @@ export default function BlogForm(props) {
       setLoading(true);
       const response = await blogApi.create(data);
       if (response.status === 201) {
-        message.success('Add blog success');
+        message.success('Thêm mới thành công');
         setIsRedirect(true);
       }
     } catch (e) {
       if (e.response.data?.message) {
         message.error(e.response.data.message);
       } else {
-        message.error('Add blog error');
+        message.error('Thêm mới thất bại');
       }
 
     } finally {
@@ -56,14 +56,14 @@ export default function BlogForm(props) {
       setLoading(true);
       const response = await blogApi.updateById(id, data);
       if (response.status === 200) {
-        message.success('Update blog success');
+        message.success('Cập nhật thành công');
         setIsRedirect(true);
       }
     } catch (e) {
       if (e.response.data?.message) {
         message.error(e.response.data.message);
       } else {
-        message.error('Update blog error');
+        message.error('Cập nhật thất bại');
       }
 
     } finally {
@@ -88,11 +88,11 @@ export default function BlogForm(props) {
   const beforeUpload = (file) => {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
-      message.error('You can only upload JPG/PNG file!');
+      message.error('Bạn chỉ được phép tải lên file định dạng JPG/PNG!');
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
-      message.error('Image must smaller than 2MB!');
+      message.error('File kích thước phải bé hơn 2MB!');
     }
     return isJpgOrPng && isLt2M;
   }
@@ -107,7 +107,7 @@ export default function BlogForm(props) {
         if (e.response.data?.message) {
           message.error(e.response.data.message);
         } else {
-          message.error('Error when get blog');
+          message.error('Lỗi khi lấy chi tiết blog');
         }
         setIsRedirect(true);
       } finally {
@@ -159,7 +159,7 @@ export default function BlogForm(props) {
     return e?.fileList[0]?.response || photo;
   };
   return (
-    <Card title={isUpdate ? 'Update blog' : 'Add blog'} loading={loading}>
+    <Card title={isUpdate ? 'Cập nhật blog' : 'Thêm mới blog'} loading={loading}>
       <Row justify="center">
         <Col span={12}>
           <Form
@@ -169,13 +169,13 @@ export default function BlogForm(props) {
             name="blog-form"
             onFinish={handleSave}
           >
-            <Form.Item label="Title" name="title" rules={requiredFieldRule}>
+            <Form.Item label="Tiêu đề" name="title" rules={requiredFieldRule}>
               <Input />
             </Form.Item>
-            <Form.Item label="Subtitle" name="subContent" rules={requiredFieldRule}>
+            <Form.Item label="Nội dung rút gọn" name="subContent" rules={requiredFieldRule}>
               <Input />
             </Form.Item>
-            <Form.Item hasFeedback label="Content" name="content" valuePropName="data" getValueFromEvent={(event, editor) => {
+            <Form.Item hasFeedback label="Nội dung chi tiết" name="content" valuePropName="data" getValueFromEvent={(event, editor) => {
               const data = editor.getData();
               return data;
             }}
@@ -191,7 +191,7 @@ export default function BlogForm(props) {
                 }}
                 editor={ClassicEditor} />
             </Form.Item>
-            <Form.Item label="Thumbnail" name="thumbnail" rules={requiredFieldRule}
+            <Form.Item label="Ảnh thubnail" name="thumbnail" rules={requiredFieldRule}
               getValueFromEvent={normFile} valuePropName="thumbnail"
             >
               <Upload
@@ -206,7 +206,7 @@ export default function BlogForm(props) {
                 {photo ? <img src={photo} alt="photo" style={{ width: '100%' }} /> : uploadButton}
               </Upload>
             </Form.Item>
-            <Form.Item label="Status" name="status" rules={requiredFieldRule}
+            <Form.Item label="Trạng thái" name="status" rules={requiredFieldRule}
             >
               <Select allowClear clearIcon >
                 <Select.Option value={'DRAFT'}>
@@ -223,7 +223,7 @@ export default function BlogForm(props) {
             <Divider />
             <Row justify="center">
               <Button type="primary" htmlType="submit">
-                Save
+                Lưu
               </Button>
             </Row>
           </Form>

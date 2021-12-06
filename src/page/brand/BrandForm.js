@@ -27,14 +27,14 @@ export default function BrandForm(props){
             setLoading(true);
             const response = await brandApi.create(data);
             if(response.status === 201){
-                message.success('Add brand success');
+                message.success('Thêm nhãn hàng thành công');
                 setIsRedirect(true);
             }
         }catch(e){
             if(e.response.data?.message){
                 message.error(e.response.data.message);
             }else{
-                message.error('Add brand error');
+                message.error('Thêm nhãn hàng thất bại');
             }
             
         }finally{
@@ -46,14 +46,14 @@ export default function BrandForm(props){
             setLoading(true);
             const response = await brandApi.updateById(id,data);
             if(response.status === 200){
-                message.success('Update brand success');
+                message.success('Cập nhật nhãn hàng thành công');
                 setIsRedirect(true);
             }
         }catch(e){
             if(e.response.data?.message){
                 message.error(e.response.data.message);
             }else{
-                message.error('Update brand error');
+                message.error('Cập nhật nhãn hàng thất bại');
             }
             
         }finally{
@@ -80,7 +80,7 @@ export default function BrandForm(props){
             if(e.response.data?.message){
                 message.error(e.response.data.message);
             }else{
-                message.error('Error when get brand');
+                message.error('Lỗi khi lấy chi tiết nhãn hàng');
             }
             setIsRedirect(true);
         }finally{
@@ -98,7 +98,7 @@ export default function BrandForm(props){
       }
   }, [isRedirect])
   return (
-    <Card title="Add Brand" loading={loading}>
+    <Card title="Thêm/Cập nhật nhãn hàng" loading={loading}>
       <Row justify="center">
         <Col span={12}>
           <Form
@@ -108,13 +108,13 @@ export default function BrandForm(props){
             name="brand-form"
             onFinish={handleSave}
           >
-            <Form.Item label="Name" name="name" rules={requiredFieldRule}>
+            <Form.Item label="Tên" name="name" rules={requiredFieldRule}>
               <Input />
             </Form.Item>
             <Divider />
             <Row justify="center">
               <Button type="primary" htmlType="submit">
-                Save
+                Lưu
               </Button>
             </Row>
           </Form>

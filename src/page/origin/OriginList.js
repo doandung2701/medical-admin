@@ -27,7 +27,7 @@ export default function OriginList(props) {
             if(e.response.data?.message){
                 message.error(e.response.data.message);
             }else{
-                message.error('Error when delete brand');
+                message.error('Lỗi khi xóa xuất xứ');
             }
         }finally{
             setLoading(false);

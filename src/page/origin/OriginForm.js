@@ -27,14 +27,14 @@ export default function OriginForm(props){
             setLoading(true);
             const response = await originApi.create(data);
             if(response.status === 201){
-                message.success('Add origin success');
+                message.success('Thêm xuất xứ thành công');
                 setIsRedirect(true);
             }
         }catch(e){
             if(e.response.data?.message){
                 message.error(e.response.data.message);
             }else{
-                message.error('Add origin error');
+                message.error('Thêm xuất xứ thất bại');
             }
             
         }finally{
@@ -46,14 +46,14 @@ export default function OriginForm(props){
             setLoading(true);
             const response = await originApi.updateById(id,data);
             if(response.status === 200){
-                message.success('Update origin success');
+                message.success('Cập nhật xuất xứ thành công');
                 setIsRedirect(true);
             }
         }catch(e){
             if(e.response.data?.message){
                 message.error(e.response.data.message);
             }else{
-                message.error('Update origin error');
+                message.error('Cập nhật xuất xứ thất bại');
             }
             
         }finally{
@@ -80,7 +80,7 @@ export default function OriginForm(props){
             if(e.response.data?.message){
                 message.error(e.response.data.message);
             }else{
-                message.error('Error when get origin');
+                message.error('Lỗi khi lấy thông tin xuất xứ');
             }
             setIsRedirect(true);
         }finally{
@@ -98,7 +98,7 @@ export default function OriginForm(props){
       }
   }, [isRedirect])
   return (
-    <Card title="Add Origin" loading={loading}>
+    <Card title="Thêm/cập nhật xuất xứ" loading={loading}>
       <Row justify="center">
         <Col span={12}>
           <Form
@@ -108,16 +108,16 @@ export default function OriginForm(props){
             name="brand-form"
             onFinish={handleSave}
           >
-            <Form.Item label="Name" name="name" rules={requiredFieldRule}>
+            <Form.Item label="Tên" name="name" rules={requiredFieldRule}>
               <Input />
             </Form.Item>
-            <Form.Item label="Code" name="code" rules={requiredFieldRule}>
+            <Form.Item label="Mã" name="code" rules={requiredFieldRule}>
               <Input />
             </Form.Item>
             <Divider />
             <Row justify="center">
               <Button type="primary" htmlType="submit">
-                Save
+                Lưu
               </Button>
             </Row>
           </Form>

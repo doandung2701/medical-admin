@@ -22,6 +22,7 @@ const { Option } = Select;
 export default function OrderDetail(props) {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
+    const [shippingFee, setShippingFee] = useState(0);
     const [isRedirect, setIsRedirect] = useState(false);
     const [initData, setinitData] = useState();
     const history = useHistory();
@@ -109,13 +110,13 @@ export default function OrderDetail(props) {
         if (status == 1) {
             return (
                 <Tag color={'green'}>
-                    Active
+                    Hoạt động
                 </Tag>
             );
         } else {
             return (
                 <Tag color={'red'}>
-                    Disable
+                    Vô hiệu hóa
                 </Tag>
             );
         }
@@ -128,26 +129,30 @@ export default function OrderDetail(props) {
             message.warning('Bạn chưa chọn trạng thái');
             return;
         }
-        if (state === initData.state)
+        if (state === initData.state && shippingFee === initData.shippingFee)
             return;
         try {
             setLoading(true);
             setConfirmLoading(true);
             const { id } = initData;
-            const response = await orderApi.updateState(id, state);
+            const response = await orderApi.updateOrder(id, {
+                state:state,
+                shippingFee:shippingFee
+            });
             if (response.status === 200) {
                 setinitData({
                     ...initData,
-                    state: state
+                    state: state,
+                    shippingFee:shippingFee
                 });
                 setVisible(false);
-                message.success('Update state success');
+                message.success('Cập nhật thành công');
             }
         } catch (e) {
             if (e.response.data?.message) {
                 message.error(e.response.data.message);
             } else {
-                message.error('Update state error');
+                message.error('Cập nhật thất bại');
             }
         } finally {
             setLoading(false);
@@ -161,7 +166,7 @@ export default function OrderDetail(props) {
         {initData && (
             <>
                 <Modal
-                    title="Update state"
+                    title="Cập nhật"
                     visible={visible}
                     onOk={handleOk}
                     confirmLoading={confirmLoading}
@@ -186,20 +191,21 @@ export default function OrderDetail(props) {
                             Hoàn thành
                         </Option>
                     </Select>
+                    <InputNumber min={0} defaultValue={initData?.shippingFee} onChange={(fee) => setShippingFee(fee)}/>
                 </Modal>
-                <Descriptions title="Order Info" bordered extra={initData.state !== 'DONE' && <Button onClick={updateOrderStatus} type="primary">Update state</Button>}>
-                    <Descriptions.Item label="Order number">{initData.orderNumber}</Descriptions.Item>
-                    <Descriptions.Item label="Customer name">{initData.customerName}</Descriptions.Item>
-                    <Descriptions.Item label="Customer email">{initData.email}</Descriptions.Item>
-                    <Descriptions.Item label="Customer address">{initData.address}</Descriptions.Item>
-                    <Descriptions.Item label="Customer note">{initData.note}</Descriptions.Item>
-                    <Descriptions.Item label="State">{renderState(initData.state)}</Descriptions.Item>
-                    <Descriptions.Item label="Number of item">{initData.itemsCount}</Descriptions.Item>
-                    <Descriptions.Item label="Payment method">{renderpaymentMethod(initData.payMethod)}</Descriptions.Item>
-                    <Descriptions.Item label="Total Item Price">{initData.price}</Descriptions.Item>
-                    <Descriptions.Item label="Shipping Price">{initData.shippingFee}</Descriptions.Item>
-                    <Descriptions.Item label="Status" span={2}>{renderStatus(initData.status)}</Descriptions.Item>
-                    <Descriptions.Item label="Order item detail info">
+                <Descriptions title="Thông tin chi tiết đơn hàng" bordered extra={initData.state !== 'DONE' && <Button onClick={updateOrderStatus} type="primary">Cập nhật</Button>}>
+                    <Descriptions.Item label="Mã đơn hàng">{initData.orderNumber}</Descriptions.Item>
+                    <Descriptions.Item label="Tên khách hàng">{initData.customerName}</Descriptions.Item>
+                    <Descriptions.Item label="Email">{initData.email}</Descriptions.Item>
+                    <Descriptions.Item label="Địa chỉ">{initData.address}</Descriptions.Item>
+                    <Descriptions.Item label="Ghi chú">{initData.note}</Descriptions.Item>
+                    <Descriptions.Item label="Trạng thái đơn hàng">{renderState(initData.state)}</Descriptions.Item>
+                    <Descriptions.Item label="Số lượng sản phẩm">{initData.itemsCount}</Descriptions.Item>
+                    <Descriptions.Item label="Phương thức thanh toán">{renderpaymentMethod(initData.payMethod)}</Descriptions.Item>
+                    <Descriptions.Item label="Tổng giá">{initData.price}</Descriptions.Item>
+                    <Descriptions.Item label="Phí ship">{initData.shippingFee}</Descriptions.Item>
+                    <Descriptions.Item label="Trạng thái" span={2}>{renderStatus(initData.status)}</Descriptions.Item>
+                    <Descriptions.Item label="Chi tiết từng mặt hàng">
                         {initData.items && initData.items.length > 0 && (
                             initData.items.map(item => {
                                 return <div key={item.id}><b>{item.productName}</b> - {item.quantity} - {formatCurrency(item.price * item.quantity)}</div>

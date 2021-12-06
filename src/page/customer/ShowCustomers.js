@@ -115,13 +115,13 @@ function ShowCustomers() {
           role:role
         };
         setData([...data]);
-        message.success('Update role success');
+        message.success('Cập nhật quyền thành công');
       }
     } catch (e) {
       if (e.response.data?.message) {
         message.error(e.response.data.message);
       } else {
-        message.error('Update role error');
+        message.error('Cập nhật quyền thất bại');
       }
     } finally {
       setLoading(false);
@@ -131,7 +131,7 @@ function ShowCustomers() {
   return (
     <>
       <Modal
-        title="Update role"
+        title="Cập nhật quyền"
         visible={visible}
         onOk={handleOk}
         confirmLoading={confirmLoading}
@@ -161,12 +161,12 @@ function ShowCustomers() {
         >
           <Row gutter={[48, 16]}>
             <Col span={8}>
-              <Form.Item label="Name" name="name">
+              <Form.Item label="Tên" name="name">
                 <Input />
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item label="Role" name="role">
+              <Form.Item label="Quyền" name="role">
                 <Select allowClear clearIcon >
                   <Option value={'ROLE_RETAIL'}>
                     Lẻ
@@ -179,7 +179,7 @@ function ShowCustomers() {
             </Col>
             <Col span={8} style={{ display: 'flex', flexDirection: 'row-reverse' }}>
               <Button type="primary" htmlType="submit">
-                Search
+                Tìm kiếm
               </Button>
             </Col>
           </Row>

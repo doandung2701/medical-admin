@@ -146,7 +146,7 @@ function ShowProducts() {
             style={{ float: 'right' }}
             onClick={handleAddNew}
           >
-            Add New
+            Thêm mới
           </Button>
           {/* <Button
             icon={<DeleteOutlined />}

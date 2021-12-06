@@ -18,17 +18,17 @@ export const columns = [
     key: 'email',
   },
   {
-    title: 'Phone',
+    title: 'SĐT',
     dataIndex: 'phoneNumber',
     key: 'phoneNumber',
   },
   {
-    title: 'Display name',
+    title: 'Tên',
     dataIndex: 'displayName',
     key: 'displayName',
   },
   {
-    title: 'Role',
+    title: 'Quyền',
     dataIndex: 'role',
     key: 'role',
     render: role => {
@@ -54,20 +54,20 @@ export const columns = [
     },
   },
   {
-    title: 'Status',
+    title: 'Trạng thái',
     key: 'status',
     dataIndex: 'status',
     render: status => {
       if(status == 1){
         return (
           <Tag color={'green'}>
-            Active
+            Hoạt động
           </Tag>
         );
       }else{
         return (
           <Tag color={'red'}>
-            Disable
+            Vô hiệu hóa
           </Tag>
         );
       }

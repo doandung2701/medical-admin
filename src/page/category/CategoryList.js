@@ -90,7 +90,7 @@ function CategoryList(props) {
             style={{ float: 'right' }}
             onClick={handleAddNew}
           >
-            Add New
+            Thêm mới
           </Button>
           <Button
             icon={<PlusOutlined />}
@@ -99,7 +99,7 @@ function CategoryList(props) {
             style={{ float: 'right', marginRight:'10px' }}
             onClick={handleEdit}
           >
-            Edit
+            Sửa
           </Button>
         </Col>
       </Row>

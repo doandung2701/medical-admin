@@ -85,12 +85,12 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           title={
             <span>
               <PartitionOutlined />
-              <span>Category</span>
+              <span>Danh mục</span>
             </span>
           }
         >
           <Menu.Item key="categoryList">
-            <span className="nav-text">List category</span>
+            <span className="nav-text">Danh sách danh mục</span>
           </Menu.Item>
         </SubMenu>
         <SubMenu
@@ -98,15 +98,15 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           title={
             <span>
               <HddOutlined />
-              <span>Products</span>
+              <span>Sản phẩm</span>
             </span>
           }
         >
           <Menu.Item key="showProducts">
-            <span className="nav-text">List Product</span>
+            <span className="nav-text">Danh sách sản phẩm</span>
           </Menu.Item>
           <Menu.Item key="addProduct">
-            <span className="nav-text">Add Product</span>
+            <span className="nav-text">Thêm sản phẩm</span>
           </Menu.Item>
         </SubMenu>
         <SubMenu
@@ -114,12 +114,12 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           title={
             <span>
               <SwitcherOutlined />
-              <span>Brands</span>
+              <span>Nhãn hàng</span>
             </span>
           }
         >
           <Menu.Item key="showBrands">
-            <span className="nav-text">List Brand</span>
+            <span className="nav-text">Danh sách nhãn hàng</span>
           </Menu.Item>
         </SubMenu>
         <SubMenu
@@ -127,24 +127,24 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           title={
             <span>
               <SnippetsOutlined />
-              <span>Origins</span>
+              <span>Xuất xứ</span>
             </span>
           }
         >
           <Menu.Item key="showOrigins">
-            <span className="nav-text">List Origin</span>
+            <span className="nav-text">Danh sách xuất xứ</span>
           </Menu.Item>
         </SubMenu>
         <Menu.Item key="showBanners">
           <span>
           <FileImageOutlined />
-            <span>Banner</span>
+            <span>Ảnh banner</span>
           </span>
         </Menu.Item>
         <Menu.Item key="showOrder">
           <span>
             <DiffOutlined />
-            <span>Order</span>
+            <span>Đơn hàng</span>
           </span>
         </Menu.Item>
         <Menu.Item key="showBlogs">
@@ -156,7 +156,7 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
         <Menu.Item key="showCustomers">
           <span>
             <DiffOutlined />
-            <span>Customer</span>
+            <span>Khách hàng</span>
           </span>
         </Menu.Item>
         {/* <Menu.Item key="settings">

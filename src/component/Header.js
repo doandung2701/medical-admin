@@ -21,7 +21,7 @@ function Header({ addNewPath, hasSelected, handleSearch }) {
       <Row>
         <Col>
           <Search
-            placeholder="Search"
+            placeholder="Tìm kiếm"
             onSearch={handleSearch}
             allowClear
             style={{ float: 'left', width: 350 }}
@@ -34,7 +34,7 @@ function Header({ addNewPath, hasSelected, handleSearch }) {
             style={{ float: 'right' }}
             onClick={handleAddNew}
           >
-            Add New
+            Thêm mới
           </Button>
 
           {/* <Button

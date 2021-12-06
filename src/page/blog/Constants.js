@@ -8,32 +8,32 @@ export const columns = [
     key: 'id',
   },
   {
-    title: 'Title',
+    title: 'Tiêu đề',
     dataIndex: 'title',
     key: 'title',
     render: text => <a>{text}</a>,
   },
   {
-    title: 'Status',
+    title: 'Trạng thái',
     key: 'status',
     dataIndex: 'status',
     render: status => {
       if(status === 'DRAFT'){
         return (
           <Tag color={'green'}>
-            DARF
+            NHÁP
           </Tag>
         );
       }else if (status === 'DISABLED'){
         return (
           <Tag color={'red'}>
-            DISABLED
+            VÔ HIỆU HÓA
           </Tag>
         );
       }else{
         return (
           <Tag color={'blue'}>
-            PUBLIC
+            CÔNG KHAI
           </Tag>
         );
       }

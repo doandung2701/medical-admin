@@ -54,7 +54,7 @@ export default function BannerForm(props) {
     const  handleSave = async () =>{
         if(banners.length ==0 )
         {
-            message.error('Banner can not be empty');
+            message.error('Bạn chưa thêm banner nào cả');
             return ;
         }
 
@@ -70,10 +70,10 @@ export default function BannerForm(props) {
             setLoading(true);
             const banner = await bannerApi.updateBanner({banners:request});
             if (banner.status === 200) {
-                message.success('Update banner success');
+                message.success('Cập nhật banner thành công');
             }
         } catch (e) {
-            message.error('Load banner error');
+            message.error('Lỗi khi cập nhật banner');
         } finally {
             setLoading(false);
         }
@@ -89,7 +89,7 @@ export default function BannerForm(props) {
                     }
                 }
             } catch (e) {
-                message.error('Load banner error');
+                message.error('Đã có lỗi xảy ra khi lấy banner');
             } finally {
                 setLoading(false);
             }
@@ -121,7 +121,7 @@ export default function BannerForm(props) {
                     style={{ float: 'right' }}
                     onClick={handleSave}
                 >
-                    Save
+                    Lưu
                 </Button>
             </Col>
         </Row>

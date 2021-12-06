@@ -28,7 +28,7 @@ export default function CategoryForm(props) {
     const [photo, setphoto] = useState();
     const parentId = new URLSearchParams(location.search).get('parentId');
     const { id } = useParams();
-    const requiredFieldRule = [{ required: true, message: 'Required Field' }];
+    const requiredFieldRule = [{ required: true, message: 'Trường không được để trống' }];
     const history = useHistory();
     const [progress, setProgress] = useState(0);
     const [isRedirect, setIsRedirect] = useState(false);
@@ -43,11 +43,11 @@ export default function CategoryForm(props) {
     const beforeUpload = (file) => {
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
-            message.error('You can only upload JPG/PNG file!');
+            message.error('Bạn chỉ upload được file định dạng JPG/PNG!');
         }
         const isLt2M = file.size / 1024 / 1024 < 2;
         if (!isLt2M) {
-            message.error('Image must smaller than 2MB!');
+            message.error('Ảnh upload phải nhỏ hơn 2MB!');
         }
         return isJpgOrPng && isLt2M;
     }
@@ -63,7 +63,7 @@ export default function CategoryForm(props) {
         try {
             await categoryApi.checkUpdateOrderValid(displaySeqNo, id);
         } catch (e) {
-            message.error('Duplicate order');
+            message.error('Trùng thứ tự');
             return ;
         }
         values.photo = photo;
@@ -71,14 +71,14 @@ export default function CategoryForm(props) {
             setLoading(true);
             const response = await categoryApi.updateCategory(id,values);
             if (response.status === 200) {
-                message.success('Update category success');
+                message.success('Cập nhật thành công');
                 setIsRedirect(true);
             }
         } catch (e) {
             if (e.response.data?.message) {
                 message.error(e.response.data.message);
             } else {
-                message.error('Update category error');
+                message.error('Cập nhật thất bại');
             }
         } finally {
             setLoading(false);
@@ -92,21 +92,21 @@ export default function CategoryForm(props) {
         try {
             await categoryApi.checkOrderValid(displaySeqNo, parentId);
         } catch (e) {
-            message.error('Duplicate order');
+            message.error('Trùng thứ tự');
             return ;
         }
         try {
             setLoading(true);
             const response = await categoryApi.create(values);
             if (response.status === 201) {
-                message.success('Add category success');
+                message.success('Thêm mới thành công');
                 setIsRedirect(true);
             }
         } catch (e) {
             if (e.response.data?.message) {
                 message.error(e.response.data.message);
             } else {
-                message.error('Add category error');
+                message.error('Thêm mới thất bại');
             }
         } finally {
             setLoading(false);
@@ -167,7 +167,7 @@ export default function CategoryForm(props) {
                 if (e.response?.data?.message) {
                     message.error(e.response.data.message);
                 } else {
-                    message.error('Error when get category');
+                    message.error('Đã có lỗi xảy ra khi lấy chi tiết danh mục');
                 }
                 setIsRedirect(true);
             } finally {
@@ -180,33 +180,33 @@ export default function CategoryForm(props) {
         }
     }, [id]);
     return (
-        <Card title={isUpdate ? 'Update category' : 'Add Category'} loading={loading}>
+        <Card title={isUpdate ? 'Cập nhật danh mục' : 'Thêm mới danh mục'} loading={loading}>
             <Row justify="center">
                 <Col span={12}>
                     <Form
                         labelCol={{ span: 4 }}
                         wrapperCol={{ span: 16 }}
                         form={form}
-                        name="brand-form"
+                        name="category-form"
                         onFinish={handleSave}
                     >
-                        <Form.Item label="Name" name="name" hasFeedback rules={requiredFieldRule}>
+                        <Form.Item label="Tên" name="name" hasFeedback rules={requiredFieldRule}>
                             <Input onBlur={handleGenSlug} />
                         </Form.Item>
-                        <Form.Item label="Description" name="description" hasFeedback rules={requiredFieldRule} >
+                        <Form.Item label="Mô tả" name="description" hasFeedback rules={requiredFieldRule} >
                             <Input />
                         </Form.Item>
                         <Form.Item label="Slug" name="slug" hasFeedback rules={requiredFieldRule}>
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Order number" name="displaySeqNo" hasFeedback rules={[
+                        <Form.Item label="Thứ tự hiển thị" name="displaySeqNo" hasFeedback rules={[
                             {
                                 required: true,
-                                message: 'Please enter order number!',
+                                message: 'Thứ tự hiển thị không được để trống!',
                             }]}>
                             <InputNumber />
                         </Form.Item>
-                        <Form.Item label="Photo" name="photo"
+                        <Form.Item label="Ảnh" name="photo"
                         >
                             <Upload
 
@@ -223,7 +223,7 @@ export default function CategoryForm(props) {
                         <Divider />
                         <Row justify="center">
                             <Button type="primary" htmlType="submit">
-                                Save
+                                Lưu
                             </Button>
                         </Row>
                     </Form>

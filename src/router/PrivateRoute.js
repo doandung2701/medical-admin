@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route, useHistory } from 'react-router';
+import { decodeToken } from '../helpers/jwtHelper';
 
 export const PrivateRoute = ({ component: C, ...props }) => {
   const auth  = useSelector(state => state.firebaseReducer.auth);
@@ -15,7 +16,7 @@ export const PrivateRoute = ({ component: C, ...props }) => {
       {...props}
       render={routeProps =>
         // eslint-disable-next-line react/jsx-props-no-spreading
-        auth != null && auth.uid != null && profile?.token?.claims['ROLE_SUPER'] === true ? <C {...routeProps} /> : <Redirect to="/login" />
+        auth != null && auth.uid != null && decodeToken(auth.stsTokenManager.accessToken).ROLE_SUPER === true ? <C {...routeProps} /> : <Redirect to="/login" />
       }
     />
   );

@@ -28,7 +28,7 @@ function useActionMenu({ selectedRow, updateEntityPath,callbackDelete,additionAc
     <Menu onClick={handleMenuClick}>
       <Menu.Item key="edit">
         <EditOutlined />
-        Update/View Detail
+        Cập nhật/Xem chi tiết
       </Menu.Item>
       <Menu.Item key="delete">
         <Popconfirm
@@ -38,7 +38,7 @@ function useActionMenu({ selectedRow, updateEntityPath,callbackDelete,additionAc
           onConfirm={handleSingleDelete}
         >
           <DeleteOutlined type="delete" />
-          Delete
+          Xóa
         </Popconfirm>
       </Menu.Item>
     </Menu>

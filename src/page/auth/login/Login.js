@@ -16,9 +16,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {signin} from '../../../redux/actions/auth';
 function Login() {
   const [form] = Form.useForm();
-  const userNameRule = [{ required: true, message: 'User name is required' }];
+  const userNameRule = [{ required: true, message: 'Email không được để trống' }];
   const passwordNameRule = [
-    { required: true, message: 'Password is required' },
+    { required: true, message: 'Password không được để trống' },
   ];
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -71,7 +71,7 @@ function Login() {
             <Divider />
             <Row justify="center">
               <Button type="primary" onClick={normalLogin}>
-                Login
+                Đăng nhập
               </Button>
             </Row>
           </Form>

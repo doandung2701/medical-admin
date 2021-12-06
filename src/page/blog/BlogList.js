@@ -36,7 +36,7 @@ export default function BlogList(props) {
             if (e.response.data?.message) {
                 message.error(e.response.data.message);
             } else {
-                message.error('Error when delete brand');
+                message.error('Có lỗi xảy ra khi xóa blog');
             }
         } finally {
             setLoading(false);
@@ -104,7 +104,7 @@ export default function BlogList(props) {
                         style={{ float: 'right' }}
                         onClick={handleAddNew}
                     >
-                        Add New
+                        Thêm mới
                     </Button>
                 </Col>
             </Row>
@@ -119,12 +119,12 @@ export default function BlogList(props) {
                 >
                     <Row gutter={[48, 16]}>
                         <Col span={8}>
-                            <Form.Item label="Title" name="title">
+                            <Form.Item label="Tiêu đề" name="title">
                                 <Input />
                             </Form.Item>
                         </Col>
                         <Col span={8}>
-                            <Form.Item label="Status" name="status">
+                            <Form.Item label="Trạng thái" name="status">
                                 <Select allowClear clearIcon >
                                     <Option value={'DRAFT'}>
                                         Nháp
@@ -140,7 +140,7 @@ export default function BlogList(props) {
                         </Col>
                         <Col span={8} style={{ display: 'flex', flexDirection: 'row-reverse' }}>
                             <Button type="primary" htmlType="submit">
-                                Search
+                                Tìm kiếm
                             </Button>
                         </Col>
                     </Row>

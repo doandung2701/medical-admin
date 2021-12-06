@@ -50,14 +50,14 @@ function LayoutBanner({ collapsed, handleOnCollapse }) {
       >
         {window.innerWidth > 992 && getCollapseIcon()}
       </div>
-      <Menu
+      {/* <Menu
         // onClick={this.handleLanguageMenuClick}
         mode="horizontal"
         className="menu"
       >
         <SubMenu title={<QuestionCircleOutlined />} />
-      </Menu>
-      <Menu
+      </Menu> */}
+      {/* <Menu
         // onClick={this.handleLanguageMenuClick}
         mode="horizontal"
         className="menu"
@@ -69,8 +69,8 @@ function LayoutBanner({ collapsed, handleOnCollapse }) {
             </Badge>
           }
         />
-      </Menu>
-      <Menu
+      </Menu> */}
+      {/* <Menu
         onClick={handleLanguageMenuClick}
         mode="horizontal"
         className="menu"
@@ -87,7 +87,7 @@ function LayoutBanner({ collapsed, handleOnCollapse }) {
             </span>
           </Menu.Item>
         </SubMenu>
-      </Menu>
+      </Menu> */}
       <Menu onClick={handleSettingMenuClick} mode="horizontal" className="menu">
         <SubMenu title={getUsernameAvatar('Cemal')}>
           <Menu.Item key="setting:1">
