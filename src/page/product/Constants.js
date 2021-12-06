@@ -8,53 +8,53 @@ export const columns = [
     key: 'id',
   },
   {
-    title: 'Name',
+    title: 'Tên',
     dataIndex: 'name',
     key: 'name',
     render: text => <a>{text}</a>,
   },
   {
-    title: 'Description',
+    title: 'Mô tả',
     dataIndex: 'description',
     key: 'description',
   },
   {
-    title: 'Brand',
+    title: 'Nhãn hàng',
     dataIndex: 'brand',
     key: 'brand',
   },
   {
-    title: 'Category',
+    title: 'Xuất xứ',
     dataIndex: 'category',
     key: 'category',
   },
   {
-    title: 'Available quantity',
+    title: 'Số lượng sẵn có',
     dataIndex: 'avalilableQuantity',
     key: 'avalilableQuantity',
   },
   {
-    title: 'Retail price',
+    title: 'Giá lẻ',
     dataIndex: 'retailPrice',
     key: 'retailPrice',
   },
   {
-    title: 'Whole sale price',
+    title: 'Giá sỉ',
     dataIndex: 'wholeSalePrice',
     key: 'wholeSalePrice',
   },
   {
-    title: 'Original retail price',
+    title: 'Giá lẻ gốc',
     dataIndex: 'retailOriginalPrice',
     key: 'retailOriginalPrice',
   },
   {
-    title: 'Original whole sale price',
+    title: 'Giá sỉ gốc',
     dataIndex: 'wholeSaleOriginalPrice',
     key: 'wholeSaleOriginalPrice',
   },
   {
-    title: 'Origin',
+    title: 'Xuất xứ',
     dataIndex: 'origin',
     key: 'origin',
   },
@@ -64,40 +64,20 @@ export const columns = [
     key: 'sku',
   },
   {
-    title: 'Create User',
-    dataIndex: 'createUser',
-    key: 'createUser',
-  },
-  {
-    title: 'Create Time',
-    dataIndex: 'createTime',
-    key: 'createTime',
-  },
-  {
-    title: 'Update User',
-    dataIndex: 'updateUser',
-    key: 'updateUser',
-  },
-  {
-    title: 'Update Time',
-    dataIndex: 'updateTime',
-    key: 'updateTime',
-  },
-  {
-    title: 'Status',
+    title: 'Trạng thái',
     key: 'status',
     dataIndex: 'status',
     render: status => {
       if(status == 1){
         return (
           <Tag color={'green'}>
-            Active
+            Hoạt động
           </Tag>
         );
       }else{
         return (
           <Tag color={'red'}>
-            Disable
+            Vô hiệu hóa
           </Tag>
         );
       }

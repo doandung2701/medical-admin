@@ -59,7 +59,7 @@ function ShowProducts() {
         if(e.response.data?.message){
             message.error(e.response.data.message);
         }else{
-            message.error('Error when delete brand');
+            message.error('Lỗi khi xóa sản phẩm');
         }
     }finally{
         setLoading(false);
@@ -174,12 +174,12 @@ function ShowProducts() {
         >
           <Row>
             <Col span={8}>
-              <Form.Item label="Query" name="query">
+              <Form.Item label="Tìm kiếm" name="query">
                 <Input />
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item label="Brand" name="brandId">
+              <Form.Item label="Nhãn hàng" name="brandId">
                 <Select allowClear clearIcon >
                   {brands.map(item => (
                     <Option key={item.id} value={item.id}>
@@ -190,7 +190,7 @@ function ShowProducts() {
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item label="Origin" name="originId">
+              <Form.Item label="Xuất xứ" name="originId">
                 <Select allowClear clearIcon >
                   {origins.map(item => (
                     <Option key={item.id} value={item.id}>
@@ -201,7 +201,7 @@ function ShowProducts() {
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item label="Category" name="categoryId">
+              <Form.Item label="Danh mục" name="categoryId">
                 <TreeSelect allowClear clearIcon showSearch treeDefaultExpandAll treeData={categories} />
               </Form.Item>
             </Col>

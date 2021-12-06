@@ -44,14 +44,14 @@ function AddProduct() {
       }
       const response = await productAPi.create(values);
       if(response.status === 201){
-        message.success('Add product success');
+        message.success('Thêm sản phẩm thành công');
         setIsRedirect(true);
       }
     }catch(e){
       if (e.response.data?.message) {
         message.error(e.response.data.message);
     } else {
-        message.error('Add product error');
+        message.error('Thêm sản phẩm thất bại');
     }
     }finally{
       setLoading(false);
@@ -106,10 +106,10 @@ function AddProduct() {
     getCategories();
   }, []);
 
-  const requiredFieldRule = [{ required: true, message: 'Required Field' }];
+  const requiredFieldRule = [{ required: true, message: 'Không được trống' }];
 
   return (
-    <Card title="Add Product" loading={loading}>
+    <Card title="Thêm/sửa sản phẩm" loading={loading}>
       <Row justify="center">
         <Col span={24}>
           <Form
@@ -119,13 +119,13 @@ function AddProduct() {
             name="product-form"
             onFinish={handleSave}
           >
-            <Form.Item hasFeedback label="Name" name="name" rules={requiredFieldRule}>
+            <Form.Item hasFeedback label="Tên" name="name" rules={requiredFieldRule}>
               <Input />
             </Form.Item>
-            <Form.Item label="Description" name="description" rules={requiredFieldRule}>
+            <Form.Item label="Mô tả" name="description" rules={requiredFieldRule}>
               <Input />
             </Form.Item>
-            <Form.Item hasFeedback label="Detail" name="detail" valuePropName="data" getValueFromEvent={(event, editor) => {
+            <Form.Item hasFeedback label="Chi tiết" name="detail" valuePropName="data" getValueFromEvent={(event, editor) => {
               const data = editor.getData();
               return data;
             }}
@@ -139,7 +139,7 @@ function AddProduct() {
             }}}
              editor={ClassicEditor} />
             </Form.Item>
-            <Form.Item hasFeedback label="Brand" name="brandId" rules={requiredFieldRule}>
+            <Form.Item hasFeedback label="Nhãn hàng" name="brandId" rules={requiredFieldRule}>
               <Select allowClear clearIcon >
                 {brands.map(item => (
                   <Option key={item.id} value={item.id}>
@@ -148,7 +148,7 @@ function AddProduct() {
                 ))}
               </Select>
             </Form.Item>
-            <Form.Item hasFeedback label="Origin" name="originId" rules={requiredFieldRule}>
+            <Form.Item hasFeedback label="Xuất xứ" name="originId" rules={requiredFieldRule}>
               <Select allowClear clearIcon >
                 {origins.map(item => (
                   <Option key={item.id} value={item.id}>
@@ -157,29 +157,29 @@ function AddProduct() {
                 ))}
               </Select>
             </Form.Item>
-            <Form.Item hasFeedback label="Category" name="categoryId" rules={requiredFieldRule}>
+            <Form.Item hasFeedback label="Danh mục" name="categoryId" rules={requiredFieldRule}>
               <TreeSelect allowClear clearIcon showSearch treeDefaultExpandAll treeData={categories} />
             </Form.Item>
-            <Form.Item hasFeedback label="Available Quantity" name="availableQuantity" rules={requiredFieldRule}>
+            <Form.Item hasFeedback label="Số lượng sẵn có" name="availableQuantity" rules={requiredFieldRule}>
               <InputNumber style={{width:'100%'}} />
             </Form.Item>
-            <Form.Item hasFeedback label="Retail Price" name="retailPrice" rules={requiredFieldRule}>
+            <Form.Item hasFeedback label="Giá lẻ" name="retailPrice" rules={requiredFieldRule}>
               <InputNumber style={{width:'100%'}}/>
             </Form.Item>
-            <Form.Item hasFeedback label="Whole sale Price" name="wholeSalePrice" rules={requiredFieldRule}>
+            <Form.Item hasFeedback label="Giá sỉ" name="wholeSalePrice" rules={requiredFieldRule}>
               <InputNumber style={{width:'100%'}}/>
             </Form.Item>
-            <Form.Item hasFeedback label="Retail original Price" name="retailOriginalPrice" rules={requiredFieldRule}>
+            <Form.Item hasFeedback label="Giá gốc lẻ" name="retailOriginalPrice" rules={requiredFieldRule}>
               <InputNumber style={{width:'100%'}}/>
             </Form.Item>
-            <Form.Item hasFeedback label="Whole sale original Price" name="wholeSaleOriginalPrice" rules={requiredFieldRule}>
+            <Form.Item hasFeedback label="Giá gốc sỉ" name="wholeSaleOriginalPrice" rules={requiredFieldRule}>
               <InputNumber style={{width:'100%'}}/>
             </Form.Item>
             <Form.Item hasFeedback label="Sku" name="sku" rules={requiredFieldRule}>
               <Input />
             </Form.Item>
             <Form.Item hasFeedback
-              label="Status"
+              label="Trạng thái"
               name="status"
               valuePropName="checked"
               initialValue={true}
@@ -192,7 +192,7 @@ function AddProduct() {
             <Divider />
             <Row justify="center">
               <Button type="primary" htmlType="submit">
-                Save
+                Lưu
               </Button>
             </Row>
           </Form>

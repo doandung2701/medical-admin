@@ -36,13 +36,13 @@ export default function ProductImage(props) {
             setLoading(true);
             const response = await productGalleryApi.createBatch(id, request);
             if (response.status === 200) {
-                message.success('Update product gallery success');
+                message.success('Cập nhật ảnh sản phẩm thành công');
             }
         } catch (e) {
             if (e.response.data?.message) {
                 message.error(e.response.data.message);
             } else {
-                message.error('Update product gallery banner error');
+                message.error('Cập nhật ảnh sản phẩm thất bại');
             }
         } finally {
             setLoading(false);
