@@ -30,8 +30,8 @@ export const columns = [
   },
   {
     title: 'Số lượng sẵn có',
-    dataIndex: 'avalilableQuantity',
-    key: 'avalilableQuantity',
+    dataIndex: 'availableQuantity',
+    key: 'availableQuantity',
   },
   {
     title: 'Giá lẻ',
