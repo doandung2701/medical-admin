@@ -59,13 +59,6 @@ export default function CategoryForm(props) {
         }
     }
     const handleUpdate = async values => {
-        const { name, description, slug, displaySeqNo } = values;
-        try {
-            await categoryApi.checkUpdateOrderValid(displaySeqNo, id);
-        } catch (e) {
-            message.error('Trùng thứ tự');
-            return ;
-        }
         values.photo = photo;
         try {
             setLoading(true);
@@ -85,16 +78,9 @@ export default function CategoryForm(props) {
         }
     }
     const handleCreate = async values => {
-        const { name, description, slug, displaySeqNo } = values;
         values.photo = photo;
         if (parentId)
             values['parentId'] = parentId;
-        try {
-            await categoryApi.checkOrderValid(displaySeqNo, parentId);
-        } catch (e) {
-            message.error('Trùng thứ tự');
-            return ;
-        }
         try {
             setLoading(true);
             const response = await categoryApi.create(values);
@@ -198,13 +184,6 @@ export default function CategoryForm(props) {
                         </Form.Item>
                         <Form.Item label="Slug" name="slug" hasFeedback rules={requiredFieldRule}>
                             <Input />
-                        </Form.Item>
-                        <Form.Item label="Thứ tự hiển thị" name="displaySeqNo" hasFeedback rules={[
-                            {
-                                required: true,
-                                message: 'Thứ tự hiển thị không được để trống!',
-                            }]}>
-                            <InputNumber />
                         </Form.Item>
                         <Form.Item label="Ảnh" name="photo"
                         >

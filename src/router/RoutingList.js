@@ -17,6 +17,7 @@ import OrderList from '../page/order/OrderList';
 import OrderDetail from '../page/order/OrderDetail';
 import BlogList from '../page/blog/BlogList';
 import BlogForm from '../page/blog/BlogForm';
+import NotificationForm from '../page/notification/NotificationForm';
 
 const routes = [
   {
@@ -118,7 +119,13 @@ const routes = [
     path: '/blogs/:id',
     component: BlogForm,
     key: '/blogs/:id',
+  },
+  {
+    path: '/messaging',
+    component: NotificationForm,
+    key: '/messaging',
   }
+
 ];
 
 function RoutingList() {

@@ -1,10 +1,12 @@
 import { Button, Col, Divider, message, Row, Tree } from 'antd';
 import React, { useEffect, useState } from 'react';
 import {
-  PlusOutlined
+  PlusOutlined,
+  DeleteOutlined
 } from '@ant-design/icons';
 import * as categoryApi from '../../api/categoryApi';
 import { useHistory } from 'react-router';
+
 function CategoryList(props) {
   const [data, setData] = useState([]);
   const [selectedNode, setSelectedNode] = useState();
@@ -18,7 +20,41 @@ function CategoryList(props) {
   const handleEdit = () => {
     history.push(`/categories/${selectedNode}`);
   }
- 
+  const deleteNodeFromTree = (node, key) => {
+    if (node.children != null) {
+      for (let i = 0; i < node.children.length; i++) {
+        let filtered = node.children.filter(f => f.key == key);
+        if (filtered && filtered.length > 0) {
+          node.children = node.children.filter(f => f.key != key);
+          return;
+        }
+        deleteNodeFromTree(node.children[i], key);
+      }
+    }
+  }
+  const deleteNode = node => {
+    const obj = { children: data };
+    deleteNodeFromTree(obj, node);
+    setData([...obj.children]);
+  }
+  const handleRemove = async () => {
+    try {
+      const response = await categoryApi.deleteById(selectedNode);
+      if (response.status === 200) {
+        message.success("Xóa danh mục thành công");
+        deleteNode(selectedNode);
+      }
+    } catch (e) {
+      if (e.response.data?.message) {
+        message.error(e.response.data.message);
+      } else {
+        message.error('Xóa danh mục thất bại');
+      }
+    } finally {
+
+    }
+  }
+
   const onLoadData = ({ key, children }) => {
     return new Promise(async (resolve, reject) => {
       if (children) {
@@ -96,10 +132,19 @@ function CategoryList(props) {
             icon={<PlusOutlined />}
             type="secondary"
             disabled={!selectedNode}
-            style={{ float: 'right', marginRight:'10px' }}
+            style={{ float: 'right', marginRight: '10px' }}
             onClick={handleEdit}
           >
             Sửa
+          </Button>
+          <Button
+            icon={<DeleteOutlined />}
+            type="secondary"
+            disabled={!selectedNode}
+            style={{ float: 'right', marginRight: '10px' }}
+            onClick={handleRemove}
+          >
+            Xóa
           </Button>
         </Col>
       </Row>

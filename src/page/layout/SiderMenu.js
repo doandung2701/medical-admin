@@ -54,11 +54,14 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
         history.push('/banners');
         break;
       case 'showOrder':
-        history.push('/orders');  
+        history.push('/orders');
         break;
-        case 'showBlogs':
-        history.push('/blogs');  
-        break;  
+      case 'showBlogs':
+        history.push('/blogs');
+        break;
+      case 'sendNotification':
+        history.push('/messaging');
+        break;
       default:
         history.push('/');
     }
@@ -137,7 +140,7 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
         </SubMenu>
         <Menu.Item key="showBanners">
           <span>
-          <FileImageOutlined />
+            <FileImageOutlined />
             <span>Ảnh banner</span>
           </span>
         </Menu.Item>
@@ -157,6 +160,12 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           <span>
             <DiffOutlined />
             <span>Khách hàng</span>
+          </span>
+        </Menu.Item>
+        <Menu.Item key="sendNotification">
+          <span>
+            <DiffOutlined />
+            <span>Gửi thông báo</span>
           </span>
         </Menu.Item>
         {/* <Menu.Item key="settings">
