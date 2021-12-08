@@ -20,13 +20,19 @@ import * as categoryApi from '../../api/categoryApi';
 import * as originApi from '../../api/originApi';
 import * as brandApi from '../../api/brandApi';
 import * as productAPi from '../../api/productApi';
+import * as productGalleryApi  from '../../api/productGalleryApi';
+import * as tagApi  from '../../api/tagApi';
 import { useHistory } from 'react-router';
+import ProductImage from './ProductImage';
+import AddProductImage from './AddProductImage';
 const { Option } = Select;
 
 function AddProduct() {
   const [form] = Form.useForm();
+  const [galleries, setGalleries] = useState([]);
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
+  const [tags, setTags] = useState([]);
   const [origins, setOrigins] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isRedirect, setIsRedirect] = useState(false);
@@ -34,69 +40,103 @@ function AddProduct() {
   const handleSave = async values => {
     console.log('onFinish', values);
     // call save API
-    try{
+    try {
       setLoading(true);
-      const {status}  = values;
-      if(status){
+      const { status } = values;
+      if (status) {
         values.status = 1;
-      }else{
+      } else {
         values.status = 0;
       }
+      if (galleries.length > 0) {
+        if (galleries.find(x => x.selected) == null) {
+          message.error("Bạn chưa chọn 1 ảnh làm thumbail");
+          return;
+        }
+      }
       const response = await productAPi.create(values);
-      if(response.status === 201){
-        message.success('Thêm sản phẩm thành công');
+      if (response.status === 201) {
+        if (galleries.length > 0) {
+          const request = [];
+          for (let index = 0; index < galleries.length; index++) {
+            const element = galleries[index];
+            request.push({
+              uri: element.url,
+              isThumbnail: element.selected ? 1 : 0
+            });
+          }
+          const { data } = response.data;
+          const responseImage = await productGalleryApi.createBatch(data.id, request);
+          debugger;
+          if (responseImage.status === 200) {
+            message.success('Thêm sản phẩm thành công');
+          }
+        }
         setIsRedirect(true);
       }
-    }catch(e){
-      if (e.response.data?.message) {
+    } catch (e) {
+      console.log(e);
+      if (e.response?.data?.message) {
         message.error(e.response.data.message);
-    } else {
+      } else {
         message.error('Thêm sản phẩm thất bại');
-    }
-    }finally{
+      }
+    } finally {
       setLoading(false);
     }
   };
   const getBrands = async () => {
-    try{
+    try {
       setLoading(true);
       const response = await brandApi.getAll();
-      if(response.status === 200)
-        if(response.data.data)
+      if (response.status === 200)
+        if (response.data.data)
           setBrands(response.data.data);
-    }catch(e){
+    } catch (e) {
 
-    }finally{
+    } finally {
       setLoading(false);
     }
   }
   useEffect(() => {
     if (isRedirect) {
-        history.push('/products');
+      history.push('/products');
     }
-}, [isRedirect]);
+  }, [isRedirect]);
   const getOrigins = async () => {
-    try{
+    try {
       setLoading(true);
       const response = await originApi.getAll();
-      if(response.status === 200)
-        if(response.data.data)
+      if (response.status === 200)
+        if (response.data.data)
           setOrigins(response.data.data);
-    }catch(e){
-     
-    }finally{
+    } catch (e) {
+
+    } finally {
       setLoading(false);
     }
   }
   const getCategories = async () => {
-    try{
+    try {
       setLoading(true);
       const response = await categoryApi.getAllCategory();
-      if(response.status === 200)
-        if(response.data.data)
+      if (response.status === 200)
+        if (response.data.data)
           setCategories(response.data.data);
-    }catch(e){
-    }finally{
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
+  }
+  const getTags = async () => {
+    try {
+      setLoading(true);
+      const response = await tagApi.getAll();
+      if (response.status === 200)
+        if (response.data.data)
+        setTags(response.data.data);
+    } catch (e) {
+    } finally {
       setLoading(false);
     }
   }
@@ -104,6 +144,7 @@ function AddProduct() {
     getBrands();
     getOrigins();
     getCategories();
+    getTags();
   }, []);
 
   const requiredFieldRule = [{ required: true, message: 'Không được trống' }];
@@ -132,12 +173,14 @@ function AddProduct() {
               rules={requiredFieldRule}
             >
               <CKEditor
-              config={{ckfinder: {
-                // Upload the images to the server using the CKFinder QuickUpload command
-                // You have to change this address to your server that has the ckfinder php connector
-                uploadUrl: process.env.REACT_APP_BASE_API + '/file/ckeditor/upload'
-            }}}
-             editor={ClassicEditor} />
+                config={{
+                  ckfinder: {
+                    // Upload the images to the server using the CKFinder QuickUpload command
+                    // You have to change this address to your server that has the ckfinder php connector
+                    uploadUrl: process.env.REACT_APP_BASE_API + '/file/ckeditor/upload'
+                  }
+                }}
+                editor={ClassicEditor} />
             </Form.Item>
             <Form.Item hasFeedback label="Nhãn hàng" name="brandId" rules={requiredFieldRule}>
               <Select allowClear clearIcon >
@@ -157,23 +200,32 @@ function AddProduct() {
                 ))}
               </Select>
             </Form.Item>
+            <Form.Item hasFeedback label="Tag" name="tags">
+              <Select allowClear clearIcon mode={'multiple'} >
+                {tags.map(item => (
+                  <Option key={item.id} value={item.id}>
+                    {item.tag}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
             <Form.Item hasFeedback label="Danh mục" name="categoryId" rules={requiredFieldRule}>
               <TreeSelect allowClear clearIcon showSearch treeDefaultExpandAll treeData={categories} />
             </Form.Item>
             <Form.Item hasFeedback label="Số lượng sẵn có" name="availableQuantity" rules={requiredFieldRule}>
-              <InputNumber style={{width:'100%'}} />
+              <InputNumber style={{ width: '100%' }} />
             </Form.Item>
             <Form.Item hasFeedback label="Giá lẻ" name="retailPrice" rules={requiredFieldRule}>
-              <InputNumber style={{width:'100%'}}/>
+              <InputNumber style={{ width: '100%' }} />
             </Form.Item>
             <Form.Item hasFeedback label="Giá sỉ" name="wholeSalePrice" rules={requiredFieldRule}>
-              <InputNumber style={{width:'100%'}}/>
+              <InputNumber style={{ width: '100%' }} />
             </Form.Item>
             <Form.Item hasFeedback label="Giá gốc lẻ" name="retailOriginalPrice" rules={requiredFieldRule}>
-              <InputNumber style={{width:'100%'}}/>
+              <InputNumber style={{ width: '100%' }} />
             </Form.Item>
             <Form.Item hasFeedback label="Giá gốc sỉ" name="wholeSaleOriginalPrice" rules={requiredFieldRule}>
-              <InputNumber style={{width:'100%'}}/>
+              <InputNumber style={{ width: '100%' }} />
             </Form.Item>
             <Form.Item hasFeedback label="Sku" name="sku" rules={requiredFieldRule}>
               <Input />
@@ -190,6 +242,7 @@ function AddProduct() {
               />
             </Form.Item>
             <Divider />
+            <AddProductImage data={galleries} onDataChange={setGalleries} />
             <Row justify="center">
               <Button type="primary" htmlType="submit">
                 Lưu

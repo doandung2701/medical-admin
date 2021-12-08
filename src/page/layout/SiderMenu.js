@@ -62,6 +62,9 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
       case 'sendNotification':
         history.push('/messaging');
         break;
+      case 'showTags':
+        history.push('/tags');
+        break;
       default:
         history.push('/');
     }
@@ -166,6 +169,12 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           <span>
             <DiffOutlined />
             <span>Gửi thông báo</span>
+          </span>
+        </Menu.Item>
+        <Menu.Item key="showTags">
+          <span>
+            <DiffOutlined />
+            <span>Quản lý tag</span>
           </span>
         </Menu.Item>
         {/* <Menu.Item key="settings">

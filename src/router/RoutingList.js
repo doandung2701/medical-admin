@@ -18,6 +18,8 @@ import OrderDetail from '../page/order/OrderDetail';
 import BlogList from '../page/blog/BlogList';
 import BlogForm from '../page/blog/BlogForm';
 import NotificationForm from '../page/notification/NotificationForm';
+import TagList from '../page/tag/TagList';
+import TagForm from '../page/tag/TagForm';
 
 const routes = [
   {
@@ -124,7 +126,23 @@ const routes = [
     path: '/messaging',
     component: NotificationForm,
     key: '/messaging',
-  }
+  },
+
+  {
+    path: '/tags',
+    component: TagList,
+    key: '/tags',
+  },
+  {
+    path: '/tags/:id',
+    component: TagForm,
+    key: '/tags/:id',
+  },
+  {
+    path: '/add-tag',
+    component: TagForm,
+    key: '/add-tag',
+  },
 
 ];
 
