@@ -20,6 +20,8 @@ import BlogForm from '../page/blog/BlogForm';
 import NotificationForm from '../page/notification/NotificationForm';
 import TagList from '../page/tag/TagList';
 import TagForm from '../page/tag/TagForm';
+import ActiveElementForm from '../page/activeElement/ActiveElementForm';
+import ActiveElementList from '../page/activeElement/ActiveElementList';
 
 const routes = [
   {
@@ -142,6 +144,22 @@ const routes = [
     path: '/add-tag',
     component: TagForm,
     key: '/add-tag',
+  },
+
+  {
+    path: '/activeElements',
+    component: ActiveElementList,
+    key: '/activeElements',
+  },
+  {
+    path: '/activeElements/:id',
+    component: ActiveElementForm,
+    key: '/activeElements/:id',
+  },
+  {
+    path: '/add-activeElement',
+    component: ActiveElementForm,
+    key: '/add-activeElement',
   },
 
 ];

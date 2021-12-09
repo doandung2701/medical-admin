@@ -20,8 +20,9 @@ import * as categoryApi from '../../api/categoryApi';
 import * as originApi from '../../api/originApi';
 import * as brandApi from '../../api/brandApi';
 import * as productAPi from '../../api/productApi';
-import * as productGalleryApi  from '../../api/productGalleryApi';
-import * as tagApi  from '../../api/tagApi';
+import * as productGalleryApi from '../../api/productGalleryApi';
+import * as tagApi from '../../api/tagApi';
+import * as activeElementApi from '../../api/activeElementApi';
 import { useHistory } from 'react-router';
 import ProductImage from './ProductImage';
 import AddProductImage from './AddProductImage';
@@ -34,6 +35,7 @@ function AddProduct() {
   const [brands, setBrands] = useState([]);
   const [tags, setTags] = useState([]);
   const [origins, setOrigins] = useState([]);
+  const [activeElements, setActiveElements] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isRedirect, setIsRedirect] = useState(false);
   const history = useHistory();
@@ -134,7 +136,19 @@ function AddProduct() {
       const response = await tagApi.getAll();
       if (response.status === 200)
         if (response.data.data)
-        setTags(response.data.data);
+          setTags(response.data.data);
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
+  }
+  const getActiveElements = async () => {
+    try {
+      setLoading(true);
+      const response = await activeElementApi.getAll();
+      if (response.status === 200)
+        if (response.data.data)
+          setActiveElements(response.data.data);
     } catch (e) {
     } finally {
       setLoading(false);
@@ -145,6 +159,7 @@ function AddProduct() {
     getOrigins();
     getCategories();
     getTags();
+    getActiveElements();
   }, []);
 
   const requiredFieldRule = [{ required: true, message: 'Không được trống' }];
@@ -205,6 +220,15 @@ function AddProduct() {
                 {tags.map(item => (
                   <Option key={item.id} value={item.id}>
                     {item.tag}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item hasFeedback label="Hoạt tính" name="activeElementId" rules={requiredFieldRule}>
+              <Select allowClear clearIcon >
+                {activeElements.map(item => (
+                  <Option key={item.id} value={item.id}>
+                    {item.name}
                   </Option>
                 ))}
               </Select>

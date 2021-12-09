@@ -65,6 +65,9 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
       case 'showTags':
         history.push('/tags');
         break;
+      case 'showActiveElements':
+        history.push('/activeElements');
+        break;
       default:
         history.push('/');
     }
@@ -177,6 +180,13 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
             <span>Quản lý tag</span>
           </span>
         </Menu.Item>
+        <Menu.Item key="showActiveElements">
+          <span>
+            <DiffOutlined />
+            <span>Quản lý hoạt tính</span>
+          </span>
+        </Menu.Item>
+        
         {/* <Menu.Item key="settings">
           <SettingOutlined />
           <span className="nav-text">Settings</span>

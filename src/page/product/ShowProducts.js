@@ -83,7 +83,7 @@ function ShowProducts() {
     }
   }
   const handleAddNew = () => {
-
+      
   }
   const getBrands = async () => {
     try {
@@ -140,14 +140,14 @@ function ShowProducts() {
     <>
       <Row>
         <Col flex="auto">
-          <Button
+          {/* <Button
             icon={<PlusOutlined />}
             type="primary"
             style={{ float: 'right' }}
             onClick={handleAddNew}
           >
             Thêm mới
-          </Button>
+          </Button> */}
           {/* <Button
             icon={<DeleteOutlined />}
             disabled={!hasSelected}

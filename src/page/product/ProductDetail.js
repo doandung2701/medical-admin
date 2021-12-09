@@ -21,6 +21,7 @@ import * as originApi from '../../api/originApi';
 import * as brandApi from '../../api/brandApi';
 import * as productAPi from '../../api/productApi';
 import * as tagApi from '../../api/tagApi';
+import * as activeElementApi from '../../api/activeElementApi';
 import { useHistory, useParams } from 'react-router';
 import ProductImage from './ProductImage';
 const { Option } = Select;
@@ -31,6 +32,7 @@ function ProductDetail() {
   const [brands, setBrands] = useState([]);
   const [origins, setOrigins] = useState([]);
   const [tags, setTags] = useState([]);
+  const [activeElements, setActiveElements] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isRedirect, setIsRedirect] = useState(false);
   const [initData, setinitData] = useState({});
@@ -133,11 +135,24 @@ function ProductDetail() {
       setLoading(false);
     }
   }
+  const getActiveElements = async () => {
+    try {
+      setLoading(true);
+      const response = await activeElementApi.getAll();
+      if (response.status === 200)
+        if (response.data.data)
+          setActiveElements(response.data.data);
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
+  }
   useEffect(() => {
     getBrands();
     getOrigins();
     getCategories();
     getTags();
+    getActiveElements();
   }, []);
   useEffect(() => {
     if (id) {
@@ -210,6 +225,15 @@ function ProductDetail() {
                   ))}
                 </Select>
               </Form.Item>
+              <Form.Item hasFeedback label="Hoạt tính" name="activeElementId" rules={requiredFieldRule}>
+              <Select allowClear clearIcon >
+                {activeElements.map(item => (
+                  <Option key={item.id} value={item.id}>
+                    {item.name}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
               <Form.Item hasFeedback label="Danh mục" name="categoryId" rules={requiredFieldRule}>
                 <TreeSelect allowClear clearIcon showSearch treeDefaultExpandAll treeData={categories} />
               </Form.Item>
