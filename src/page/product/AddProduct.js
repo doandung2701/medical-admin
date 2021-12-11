@@ -26,6 +26,7 @@ import * as activeElementApi from '../../api/activeElementApi';
 import { useHistory } from 'react-router';
 import ProductImage from './ProductImage';
 import AddProductImage from './AddProductImage';
+import { filterSelectOption } from '../../helpers/queryHelper';
 const { Option } = Select;
 
 function AddProduct() {
@@ -198,7 +199,7 @@ function AddProduct() {
                 editor={ClassicEditor} />
             </Form.Item>
             <Form.Item hasFeedback label="Nhãn hàng" name="brandId" rules={requiredFieldRule}>
-              <Select allowClear clearIcon >
+            <Select allowClear showSearch clearIcon filterOption={filterSelectOption}>
                 {brands.map(item => (
                   <Option key={item.id} value={item.id}>
                     {item.name}
@@ -207,7 +208,7 @@ function AddProduct() {
               </Select>
             </Form.Item>
             <Form.Item hasFeedback label="Xuất xứ" name="originId" rules={requiredFieldRule}>
-              <Select allowClear clearIcon >
+            <Select allowClear showSearch clearIcon filterOption={filterSelectOption}>
                 {origins.map(item => (
                   <Option key={item.id} value={item.id}>
                     {item.name}
@@ -216,7 +217,7 @@ function AddProduct() {
               </Select>
             </Form.Item>
             <Form.Item hasFeedback label="Tag" name="tags">
-              <Select allowClear clearIcon mode={'multiple'} >
+            <Select allowClear showSearch clearIcon mode={'multiple'} filterOption={filterSelectOption}>
                 {tags.map(item => (
                   <Option key={item.id} value={item.id}>
                     {item.tag}
@@ -224,8 +225,8 @@ function AddProduct() {
                 ))}
               </Select>
             </Form.Item>
-            <Form.Item hasFeedback label="Hoạt tính" name="activeElementId" rules={requiredFieldRule}>
-              <Select allowClear clearIcon >
+            <Form.Item hasFeedback label="Hoạt chất" name="activeElements">
+              <Select allowClear showSearch clearIcon mode={'multiple'} filterOption={filterSelectOption}>
                 {activeElements.map(item => (
                   <Option key={item.id} value={item.id}>
                     {item.name}

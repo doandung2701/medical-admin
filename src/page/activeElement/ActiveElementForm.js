@@ -27,14 +27,14 @@ export default function ActiveElementForm(props){
             setLoading(true);
             const response = await activeElementApi.create(data);
             if(response.status === 201){
-                message.success('Thêm hoạt tính thành công');
+                message.success('Thêm hoạt chất thành công');
                 setIsRedirect(true);
             }
         }catch(e){
             if(e.response.data?.message){
                 message.error(e.response.data.message);
             }else{
-                message.error('Thêm hoạt tính thất bại');
+                message.error('Thêm hoạt chất thất bại');
             }
             
         }finally{
@@ -46,14 +46,14 @@ export default function ActiveElementForm(props){
             setLoading(true);
             const response = await activeElementApi.updateById(id,data);
             if(response.status === 200){
-                message.success('Cập nhật hoạt tính thành công');
+                message.success('Cập nhật hoạt chất thành công');
                 setIsRedirect(true);
             }
         }catch(e){
             if(e.response.data?.message){
                 message.error(e.response.data.message);
             }else{
-                message.error('Cập nhật hoạt tính thất bại');
+                message.error('Cập nhật hoạt chất thất bại');
             }
             
         }finally{
@@ -79,7 +79,7 @@ export default function ActiveElementForm(props){
             if(e.response.data?.message){
                 message.error(e.response.data.message);
             }else{
-                message.error('Lỗi khi lấy chi tiết hoạt tính');
+                message.error('Lỗi khi lấy chi tiết hoạt chất');
             }
             setIsRedirect(true);
         }finally{
@@ -97,7 +97,7 @@ export default function ActiveElementForm(props){
       }
   }, [isRedirect])
   return (
-    <Card title="Thêm/Cập nhật hoạt tính" loading={loading}>
+    <Card title="Thêm/Cập nhật hoạt chất" loading={loading}>
       <Row justify="center">
         <Col span={12}>
           <Form

@@ -183,7 +183,7 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
         <Menu.Item key="showActiveElements">
           <span>
             <DiffOutlined />
-            <span>Quản lý hoạt tính</span>
+            <span>Quản lý hoạt chất</span>
           </span>
         </Menu.Item>
         

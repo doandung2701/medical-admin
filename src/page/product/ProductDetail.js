@@ -24,6 +24,7 @@ import * as tagApi from '../../api/tagApi';
 import * as activeElementApi from '../../api/activeElementApi';
 import { useHistory, useParams } from 'react-router';
 import ProductImage from './ProductImage';
+import { filterSelectOption } from '../../helpers/queryHelper';
 const { Option } = Select;
 
 function ProductDetail() {
@@ -35,10 +36,8 @@ function ProductDetail() {
   const [activeElements, setActiveElements] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isRedirect, setIsRedirect] = useState(false);
-  const [initData, setinitData] = useState({});
   const history = useHistory();
   const { id } = useParams();
-  const [isReady, setIsReady] = useState(false);
 
   const handleSave = async values => {
     // call save API
@@ -114,10 +113,8 @@ function ProductDetail() {
       const response = await productAPi.getDetailById(id);
       if (response.status === 200)
         if (response.data.data) {
-          setinitData(response.data.data);
-          setIsReady(true);
+          form.setFieldsValue(response.data.data);
         }
-
     } catch (e) {
     } finally {
       setLoading(false);
@@ -166,8 +163,7 @@ function ProductDetail() {
       <Card title="Cập nhật sản phẩm" loading={loading}>
         <Row justify="center">
           <Col span={24}>
-            {isReady && <Form
-              initialValues={initData}
+            {<Form
               labelCol={{ span: 6 }}
               wrapperCol={{ span: 14 }}
               form={form}
@@ -199,7 +195,7 @@ function ProductDetail() {
                   editor={ClassicEditor} />
               </Form.Item>
               <Form.Item hasFeedback label="Nhãn hàng" name="brandId" rules={requiredFieldRule}>
-                <Select allowClear clearIcon >
+                <Select allowClear showSearch clearIcon filterOption={filterSelectOption}>
                   {brands.map(item => (
                     <Option key={item.id} value={item.id}>
                       {item.name}
@@ -208,7 +204,7 @@ function ProductDetail() {
                 </Select>
               </Form.Item>
               <Form.Item hasFeedback label="Xuất xứ" name="originId" rules={requiredFieldRule}>
-                <Select allowClear clearIcon >
+                <Select allowClear showSearch clearIcon filterOption={filterSelectOption}>
                   {origins.map(item => (
                     <Option key={item.id} value={item.id}>
                       {item.name}
@@ -216,8 +212,8 @@ function ProductDetail() {
                   ))}
                 </Select>
               </Form.Item>
-              <Form.Item hasFeedback label="Tag" name="tags" >
-                <Select allowClear clearIcon mode={'multiple'} >
+              <Form.Item hasFeedback label="Tag" name="tags">
+                <Select allowClear showSearch clearIcon mode={'multiple'} filterOption={filterSelectOption}>
                   {tags.map(item => (
                     <Option key={item.id} value={item.id}>
                       {item.tag}
@@ -225,8 +221,8 @@ function ProductDetail() {
                   ))}
                 </Select>
               </Form.Item>
-              <Form.Item hasFeedback label="Hoạt tính" name="activeElementId" rules={requiredFieldRule}>
-              <Select allowClear clearIcon >
+              <Form.Item hasFeedback label="Hoạt tính" name="activeElements">
+              <Select allowClear showSearch clearIcon mode={'multiple'} filterOption={filterSelectOption}>
                 {activeElements.map(item => (
                   <Option key={item.id} value={item.id}>
                     {item.name}

@@ -46,14 +46,8 @@ function ShowProducts() {
         setLoading(true);
         const response = await productAPi.softDeleteById(selectedRow.id);
         if(response && response.status === 200){
-            let selectedId = data.findIndex(x => x.id === selectedRow.id);
-            if(selectedId !== -1){
-                data[selectedId] = {
-                    ...data[selectedId],
-                    status: 0
-                }
-                setData([...data]);
-            }
+            let newData = data.filter(x => x.id !== selectedRow.id);
+            setData([...newData]);
         }
     } catch (e) {
         if(e.response.data?.message){
