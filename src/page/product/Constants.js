@@ -44,16 +44,6 @@ export const columns = [
     key: 'wholeSalePrice',
   },
   {
-    title: 'Giá lẻ gốc',
-    dataIndex: 'retailOriginalPrice',
-    key: 'retailOriginalPrice',
-  },
-  {
-    title: 'Giá sỉ gốc',
-    dataIndex: 'wholeSaleOriginalPrice',
-    key: 'wholeSaleOriginalPrice',
-  },
-  {
     title: 'Xuất xứ',
     dataIndex: 'origin',
     key: 'origin',

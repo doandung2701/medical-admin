@@ -186,7 +186,7 @@ function AddProduct() {
               const data = editor.getData();
               return data;
             }}
-              rules={requiredFieldRule}
+             
             >
               <CKEditor
                 config={{
@@ -244,12 +244,6 @@ function AddProduct() {
               <InputNumber style={{ width: '100%' }} />
             </Form.Item>
             <Form.Item hasFeedback label="Giá sỉ" name="wholeSalePrice" rules={requiredFieldRule}>
-              <InputNumber style={{ width: '100%' }} />
-            </Form.Item>
-            <Form.Item hasFeedback label="Giá gốc lẻ" name="retailOriginalPrice" rules={requiredFieldRule}>
-              <InputNumber style={{ width: '100%' }} />
-            </Form.Item>
-            <Form.Item hasFeedback label="Giá gốc sỉ" name="wholeSaleOriginalPrice" rules={requiredFieldRule}>
               <InputNumber style={{ width: '100%' }} />
             </Form.Item>
             <Form.Item hasFeedback label="Sku" name="sku" rules={requiredFieldRule}>
