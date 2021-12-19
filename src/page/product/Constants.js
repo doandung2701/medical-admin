@@ -54,17 +54,32 @@ export const columns = [
     key: 'sku',
   },
   {
+    title: 'Hoạt chất',
+    dataIndex: 'activeElements',
+    key: 'activeElements',
+    render: activeElements => {
+      if (activeElements && Array.isArray(activeElements) && activeElements.length > 0) {
+        return activeElements.map(item => {
+          return <Tag color={'green'}>
+            {item.name}
+          </Tag>
+        });
+      }
+      return '';
+    }
+  },
+  {
     title: 'Trạng thái',
     key: 'status',
     dataIndex: 'status',
     render: status => {
-      if(status == 1){
+      if (status == 1) {
         return (
           <Tag color={'green'}>
             Hoạt động
           </Tag>
         );
-      }else{
+      } else {
         return (
           <Tag color={'red'}>
             Vô hiệu hóa

@@ -13,6 +13,8 @@ import * as categoryApi from '../../api/categoryApi';
 import * as originApi from '../../api/originApi';
 import * as brandApi from '../../api/brandApi';
 import * as productAPi from '../../api/productApi';
+import * as activeElementApi from '../../api/activeElementApi';
+import { filterSelectOption } from '../../helpers/queryHelper';
 const { Option } = Select;
 const { Search } = Input;
 
@@ -26,6 +28,8 @@ function ShowProducts() {
   const [loading, setLoading] = useState(false);
   const [sku, setSku] = useState();
   const [status, setStatus] = useState(true);
+  const [activeElements, setActiveElements] = useState([]);
+
   const {
     DataTable,
     hasSelected,
@@ -43,22 +47,22 @@ function ShowProducts() {
   });
   const hanldeDelete = async (selectedRow) => {
     try {
-        setLoading(true);
-        const response = await productAPi.softDeleteById(selectedRow.id);
-        if(response && response.status === 200){
-            let newData = data.filter(x => x.id !== selectedRow.id);
-            setData([...newData]);
-        }
+      setLoading(true);
+      const response = await productAPi.softDeleteById(selectedRow.id);
+      if (response && response.status === 200) {
+        let newData = data.filter(x => x.id !== selectedRow.id);
+        setData([...newData]);
+      }
     } catch (e) {
-        if(e.response.data?.message){
-            message.error(e.response.data.message);
-        }else{
-            message.error('Lỗi khi xóa sản phẩm');
-        }
-    }finally{
-        setLoading(false);
+      if (e.response.data?.message) {
+        message.error(e.response.data.message);
+      } else {
+        message.error('Lỗi khi xóa sản phẩm');
+      }
+    } finally {
+      setLoading(false);
     }
-}
+  }
   const handleSearch = async (values) => {
     values['offset'] = currentPage * pageSize;
     values['limit'] = pageSize;
@@ -77,7 +81,7 @@ function ShowProducts() {
     }
   }
   const handleAddNew = () => {
-      
+
   }
   const getBrands = async () => {
     try {
@@ -88,6 +92,18 @@ function ShowProducts() {
           setBrands(response.data.data);
     } catch (e) {
 
+    } finally {
+      setLoading(false);
+    }
+  }
+  const getActiveElements = async () => {
+    try {
+      setLoading(true);
+      const response = await activeElementApi.getAll();
+      if (response.status === 200)
+        if (response.data.data)
+          setActiveElements(response.data.data);
+    } catch (e) {
     } finally {
       setLoading(false);
     }
@@ -121,15 +137,16 @@ function ShowProducts() {
     getBrands();
     getOrigins();
     getCategories();
+    getActiveElements();
   }, []);
   useEffect(() => {
     form.submit();
     // handleSearch()
-}, [currentPage,pageSize]);
+  }, [currentPage, pageSize]);
   useEffect(() => {
-    if(deleteItem)
-        hanldeDelete(deleteItem);
-}, [deleteItem]);
+    if (deleteItem)
+      hanldeDelete(deleteItem);
+  }, [deleteItem]);
   return (
     <>
       <Row>
@@ -199,7 +216,17 @@ function ShowProducts() {
                 <TreeSelect allowClear clearIcon showSearch treeDefaultExpandAll treeData={categories} />
               </Form.Item>
             </Col>
-            <Col span={8}></Col>
+            <Col span={8}>
+              <Form.Item label="Hoạt chất" name="activeElements">
+                <Select allowClear showSearch clearIcon mode={'multiple'} filterOption={filterSelectOption}>
+                  {activeElements.map(item => (
+                    <Option key={item.id} value={item.id}>
+                      {item.name}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
             <Col span={8} style={{ display: 'flex', flexDirection: 'row-reverse' }}>
               <Button type="primary" htmlType="submit">
                 Search
