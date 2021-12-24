@@ -13,7 +13,7 @@ const updateById = (id,data) => {
 const softDeleteById = (id) => {
     return request().delete(`/activeElements/${id}`);
 }
-const getAll = (query) => {
+const getAll = (query = {}) => {
     return request().get(`/activeElements/getAll?${buildQueryParam(query)}`);
 }
 export {
