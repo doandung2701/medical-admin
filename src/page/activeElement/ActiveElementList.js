@@ -40,12 +40,15 @@ export default function ActiveElementList(props) {
         loading
     });
     const handleSearch = async (values) => {
-        setName(values);
+        // setName(values);
+        searchRequest(values);
     }
-    const searchRequest = async () => {
+    const searchRequest = async (values = null) => {
         try {
             setLoading(true);
-            const response = await activeElementApi.getAll();
+            const response = await activeElementApi.getAll({
+                name: values
+            });
             if (response && response.status === 200) {
                 const data = response.data.data;
                 setTotal(data.length);

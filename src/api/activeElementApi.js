@@ -1,3 +1,4 @@
+import { buildQueryParam } from "../helpers/queryHelper";
 import request from "./baseApi"
 
 const create = (body) => {
@@ -12,8 +13,8 @@ const updateById = (id,data) => {
 const softDeleteById = (id) => {
     return request().delete(`/activeElements/${id}`);
 }
-const getAll = () => {
-    return request().get(`/activeElements/getAll`);
+const getAll = (query) => {
+    return request().get(`/activeElements/getAll?${buildQueryParam(query)}`);
 }
 export {
     create,
